@@ -132,13 +132,14 @@ GameObject:
   m_Component:
   - component: {fileID: 21867320}
   - component: {fileID: 21867321}
+  - component: {fileID: 21867322}
   m_Layer: 0
   m_Name: MicRecord
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &21867320
 Transform:
   m_ObjectHideFlags: 0
@@ -161,9 +162,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 21867319}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3ff48812a8d660a44b79c8e06bd6a80d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recordingIndicator: {fileID: 2033043051}
+--- !u!114 &21867322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21867319}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81fc66fc454642f41b139d1631692b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   recordingIndicator: {fileID: 2033043051}
@@ -1816,6 +1830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81fc66fc454642f41b139d1631692b75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  recordingIndicator: {fileID: 2033043051}
 --- !u!4 &1048113617
 Transform:
   m_ObjectHideFlags: 0

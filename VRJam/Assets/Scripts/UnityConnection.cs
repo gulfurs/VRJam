@@ -5,44 +5,51 @@ using UnityEngine;
 using System.Net.Sockets;
 using System;
 using System.IO;
+using System.Text;
+using System.Threading.Tasks;
 
 public class UnityConnection : MonoBehaviour
 {
-private string serverIP = "127.0.0.1";  // Localhost IP
-    private int port = 65432;  // Port used by Python server
+    private TcpClient client;
+    private NetworkStream stream;
+    private byte[] buffer = new byte[1024];
 
     void Start()
     {
-        ConnectToPythonServer();
+        // Connect to Python server
+        client = new TcpClient("127.0.0.1", 5000);  // Match with Python's IP and port
+        stream = client.GetStream();
+        Debug.Log("Connected to Python server.");
     }
 
-    void ConnectToPythonServer()
+    void Update()
     {
-        try
+        // When spacebar is pressed, start recording
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            // Create a TcpClient to connect to the Python server
-            TcpClient client = new TcpClient(serverIP, port);
-            NetworkStream stream = client.GetStream();
-
-            // Send a message to the Python server
-            string message = "Hello from Unity!";
-            byte[] data = System.Text.Encoding.ASCII.GetBytes(message);
-            stream.Write(data, 0, data.Length);
-            Debug.Log("Sent message: " + message);
-
-            // Receive the response from the Python server
-            data = new byte[256];
-            int bytesRead = stream.Read(data, 0, data.Length);
-            string response = System.Text.Encoding.ASCII.GetString(data, 0, bytesRead);
-            Debug.Log("Received response from Python: " + response);
-
-            // Close the connection
-            stream.Close();
-            client.Close();
+            SendMessageToPython("start");
+            Debug.Log("Recording started, waiting for transcription...");
+            Task.Run(() => ReceiveTranscriptionAsync());  // Receive transcription asynchronously
         }
-        catch (Exception e)
-        {
-            Debug.LogError("Error: " + e.Message);
-        }
+    }
+
+    void SendMessageToPython(string message)
+    {
+        byte[] data = Encoding.ASCII.GetBytes(message);
+        stream.Write(data, 0, data.Length);
+        Debug.Log("Sent message to Python: " + message);
+    }
+
+    async Task ReceiveTranscriptionAsync()
+    {
+        int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
+        string transcription = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+        Debug.Log("Transcription from Python: " + transcription);  // Log the transcription in Unity
+    }
+
+    void OnApplicationQuit()
+    {
+        stream.Close();
+        client.Close();
     }
 }

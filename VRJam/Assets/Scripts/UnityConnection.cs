@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 using System.Net.Sockets;
 using System;
@@ -13,6 +14,11 @@ public class UnityConnection : MonoBehaviour
     private TcpClient client;
     private NetworkStream stream;
     private byte[] buffer = new byte[1024];
+
+
+    public TextMeshPro transcriptionText;  // Use TextMesh for 3D text
+
+    public string transcription;
 
     void Start()
     {
@@ -31,6 +37,7 @@ public class UnityConnection : MonoBehaviour
             Debug.Log("Recording started, waiting for transcription...");
             Task.Run(() => ReceiveTranscriptionAsync());  // Receive transcription asynchronously
         }
+        Updatetext();
     }
 
     void SendMessageToPython(string message)
@@ -43,8 +50,13 @@ public class UnityConnection : MonoBehaviour
     async Task ReceiveTranscriptionAsync()
     {
         int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
-        string transcription = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+        transcription = Encoding.ASCII.GetString(buffer, 0, bytesRead);
         Debug.Log("Transcription from Python: " + transcription);  // Log the transcription in Unity
+       
+    }
+
+    public void Updatetext(){
+        transcriptionText.text = transcription;
     }
 
     void OnApplicationQuit()

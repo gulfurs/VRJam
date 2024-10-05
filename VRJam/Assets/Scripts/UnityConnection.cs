@@ -15,10 +15,11 @@ public class UnityConnection : MonoBehaviour
     private NetworkStream stream;
     private byte[] buffer = new byte[1024];
 
-
     public TextMeshPro transcriptionText;  // Use TextMesh for 3D text
 
     public string transcription;
+    
+    public Keywords keywords; // Refrence for keywords script
 
     void Start()
     {
@@ -51,8 +52,12 @@ public class UnityConnection : MonoBehaviour
     {
         int bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length);
         transcription = Encoding.ASCII.GetString(buffer, 0, bytesRead);
+
         Debug.Log("Transcription from Python: " + transcription);  // Log the transcription in Unity
        
+       if (keywords != null){
+            keywords.HandleTranscription(transcription);
+       }
     }
 
     public void Updatetext(){

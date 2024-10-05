@@ -4,6 +4,8 @@ import whisper
 import socket
 import warnings
 
+
+
 warnings.filterwarnings("ignore", category=UserWarning)  # Suppress the FP16 warning
 
 # Socket setup

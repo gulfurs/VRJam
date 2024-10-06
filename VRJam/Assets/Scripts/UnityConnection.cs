@@ -20,6 +20,7 @@ public class UnityConnection : MonoBehaviour
     public string transcription;
     
     public Keywords keywords; // Refrence for keywords script
+    private bool PrefabSpawned = false;
 
     void Start()
     {
@@ -37,8 +38,14 @@ public class UnityConnection : MonoBehaviour
             SendMessageToPython("start");
             Debug.Log("Recording started, waiting for transcription...");
             Task.Run(() => ReceiveTranscriptionAsync());  // Receive transcription asynchronously
+            
         }
+
+         if (PrefabSpawned)
+        {
         Updatetext();
+        PrefabSpawned = false; // Reset flag after Updatetext
+        }
     }
 
     void SendMessageToPython(string message)
@@ -54,14 +61,16 @@ public class UnityConnection : MonoBehaviour
         transcription = Encoding.ASCII.GetString(buffer, 0, bytesRead);
 
         Debug.Log("Transcription from Python: " + transcription);  // Log the transcription in Unity
+        PrefabSpawned = true;
        
-       if (keywords != null){
-            keywords.HandleTranscription(transcription);
-       }
     }
 
     public void Updatetext(){
         transcriptionText.text = transcription;
+        //PrefabSpawned = true;
+        if (PrefabSpawned == true){
+        keywords.HandleTranscription(transcription);
+        }
     }
 
     void OnApplicationQuit()

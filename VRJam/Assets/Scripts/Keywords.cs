@@ -5,23 +5,36 @@ using TMPro;
 
 public class Keywords : MonoBehaviour
 {
+// Dictionary to store keyword-prefab pairs
+    public Dictionary<string, GameObject> keywordPrefabMap = new Dictionary<string, GameObject>();
 
-    // Dictionary to store keyword-prefab pairs
-    private Dictionary<string, GameObject> keywordPrefabMap = new Dictionary<string, GameObject>();
+    // Array of keyword-prefab pairs for Unity Inspector
+    [System.Serializable]
+    public class KeywordPrefabPair
+    {
+        public string keyword;        // The keyword to recognize
+        public GameObject prefab;     // The prefab associated with the keyword
+    }
+
+    public KeywordPrefabPair[] keywordPrefabPairs; // Expose in Inspector
 
     // Reference to spawn point
     public Transform spawnPoint;
 
     void Start()
     {
-        // Add keyword-prefab mappings here
-        keywordPrefabMap.Add("jupiter", Resources.Load<GameObject>("Prefabs/JupiterPrefab"));  // Ensure the prefab is in a "Resources/Prefabs" folder
-        // Add more keywords as needed
+        // Populate the dictionary from the array
+        keywordPrefabMap = new Dictionary<string, GameObject>();
+        foreach (var pair in keywordPrefabPairs)
+        {
+            keywordPrefabMap.Add(pair.keyword.ToLower(), pair.prefab); // Case insensitive key
+        }
     }
 
     public void HandleTranscription(string transcription)
     {
 
+        //Debug.Log("Transcription in Keywords: " + transcription);
         // Check for any keywords
         foreach (var keyword in keywordPrefabMap.Keys)
         {
@@ -37,7 +50,7 @@ public class Keywords : MonoBehaviour
         if (prefab != null && spawnPoint != null)
         {
             Instantiate(prefab, spawnPoint.position, spawnPoint.rotation);
-            Debug.Log("Spawned " + prefab.name);
+            Debug.Log("Spawned " + prefab.name + " at " + spawnPoint.position);
         }
         else
         {

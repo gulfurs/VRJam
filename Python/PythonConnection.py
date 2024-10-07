@@ -49,7 +49,7 @@ def record_audio(file_path):
     wf.close()
 
 def transcribe_audio(file_path):
-    model = whisper.load_model("tiny")
+    model = whisper.load_model("base")
     print("Transcribing audio in English...")
     result = model.transcribe(file_path, language="en")
     return result['text']

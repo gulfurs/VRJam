@@ -187,9 +187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keywordPrefabPairs:
-  - keyword: Jupiter
-    prefab: {fileID: 8714905048799575590, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-  - keyword: Earth
+  - keyword: Hello
     prefab: {fileID: 5411335768921471150, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
   spawnPoint: {fileID: 103064574}
 --- !u!4 &36787192
@@ -885,7 +883,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &648832015
 Transform:
   m_ObjectHideFlags: 0
@@ -1605,7 +1603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &846336786
 Transform:
   m_ObjectHideFlags: 0
@@ -3434,120 +3432,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &2618592238210198364
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 6.11
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.38
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.5390125
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8674302624700679132, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8714905048799575590, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
-      propertyPath: m_Name
-      value: JupiterPrefab
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8cbcd5ee45c9b9d45936b2ba990b40f7, type: 3}
---- !u!1001 &4421845443366319152
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 5411335768921471150, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_Name
-      value: Earth
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.971316
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 3.9368308
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.36325404
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5442955836439894219, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 717188a73fa35fd42aa2e95972303a6f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -3562,5 +3446,3 @@ SceneRoots:
   - {fileID: 349724651}
   - {fileID: 1048113617}
   - {fileID: 36787192}
-  - {fileID: 2618592238210198364}
-  - {fileID: 4421845443366319152}

@@ -17,7 +17,7 @@ public class UnityConnection : MonoBehaviour
 
     public TextMeshPro transcriptionText;  // Use TextMesh for 3D text
 
-    public string transcription;
+    private string transcription;
     
     public Keywords keywords; // Refrence for keywords script
     private bool PrefabSpawned = false;

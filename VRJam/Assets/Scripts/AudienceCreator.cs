@@ -7,49 +7,64 @@ public class AudienceCreator : MonoBehaviour
 public GameObject audiencePrefab; // The capsule prefab
     
     // Start position (center point of colosseum)
-    public Vector3 center = new Vector3(35, 20, 200);
+    public Vector3 center = Vector3.zero;
 
     // Arc parameters
-    public float radius = 100f; // Radius of the colosseum arc
-    public int numberOfSeats = 10; // Total number of seats in the arc
-    public float seatDistance = 4f; // Horizontal distance between each seat
-    public float rowHeight = 2.5f;  // Height difference between rows
-
-    public float startHeight = 25f;
+    public float radius; // Radius of the colosseum arc
+    public float radiusInc; 
+    public int numberOfSeats; // Total seats in the arc
+    public int NrOfRows = 12; // Total rows
+    public float seatDistance; // distance between each seat
+    public float rowHeight;  // Height between rows
+    public float startHeight; // Start height
+    public float randomnes = 0.3f; //The random 
+    public float tiltRange = 5f;
 
     void Start()
     {
-        PlaceAudienceInArc();
+        NewPlaceAudioenceArc();
     }
 
-    void PlaceAudienceInArc()
-    {
-        // We calculate the total angle the audience members should cover.
-        // For example, if we want to cover a half circle (180 degrees).
-        float totalArcAngle = 360f;
-        float angleStep = totalArcAngle / (numberOfSeats - 1); // Angle between each seat
-
-        // Loop through and place audience members in the arc
-        for (int i = 0; i < numberOfSeats; i++)
+    void NewPlaceAudioenceArc(){
+        // Outer loop for multiple rows
+        for (int row = 0; row < NrOfRows; row++)
         {
-            // Calculate the angle in degrees for the current seat
-            float currentAngle = -totalArcAngle / 2 + i * angleStep; // Starts at -90 degrees and ends at +90
-            float radian = Mathf.Deg2Rad * currentAngle;
+            // Calculate the radius for the current row
+            float currentRadius = radius + row * radiusInc;
 
-            // Calculate the X and Z position using the circular arc formula
-            float x = center.x + radius * Mathf.Cos(radian);
-            float z = center.z + radius * Mathf.Sin(radian);
+            // Total arc angle (e.g., half circle = 180 degrees)
+            float totalArcAngle = 360f;
+            float angleStep = totalArcAngle / (numberOfSeats - 1); // Angle between seats
 
-            // Alternate between the lower and upper row by adding the height every second seat
-            float y = (i % 2 == 0) ? startHeight : rowHeight + startHeight;
-            //float y = rowHeight + ;
+            // Inner loop for seats in the current row
+            for (int i = 0; i < numberOfSeats; i++)
+            {
+                // Calculate the angle for the current seat in degrees
+                float currentAngle = -totalArcAngle / 2 + i * angleStep; // Start from -90 to +90
+                float radian = Mathf.Deg2Rad * currentAngle;
 
-            // Position for the audience member
-            Vector3 seatPosition = new Vector3(x, y, z);
+                // Calculate the X and Z position relative to the arc center
+                float x = center.x + currentRadius * Mathf.Cos(radian);
+                float z = center.z + currentRadius * Mathf.Sin(radian);
 
-            // Instantiate the audience member in the arc, facing the center of the colosseum
-            Quaternion rotation = Quaternion.LookRotation(center - seatPosition); // Rotate to face the center
-            Instantiate(audiencePrefab, seatPosition, rotation, transform);
+                // Add the random effect for x and z pos
+                x += Random.Range(-randomnes, randomnes);
+                z += Random.Range(-randomnes, randomnes);
+
+                float randomTiltX = Random.Range(-tiltRange, tiltRange); // Tilt along the X-axis
+                float randomTiltZ = Random.Range(-tiltRange, tiltRange); // Tilt along the Z-axis
+                Quaternion randomTilt = Quaternion.Euler(randomTiltX, 0f, randomTiltZ);
+
+                // Calculate the Y position for each row
+                float y = startHeight + row * rowHeight;
+
+                // Calculate the seat position based on the new arc center and height
+                Vector3 seatPosition = new Vector3(x, y, z);
+
+                // Instantiate the audience member, rotating them to face the arc center
+                Quaternion rotation = Quaternion.LookRotation(center - seatPosition) * randomTilt;
+                Instantiate(audiencePrefab, seatPosition, rotation, transform);
+            }
         }
     }
 }

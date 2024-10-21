@@ -624,6 +624,7 @@ GameObject:
   - component: {fileID: 3281556879651480057}
   - component: {fileID: 7020786471312738679}
   - component: {fileID: 7815604694091316497}
+  - component: {fileID: 4466094934660232599}
   m_Layer: 0
   m_Name: Colosseum
   m_TagString: Untagged
@@ -640,8 +641,8 @@ Transform:
   m_GameObject: {fileID: 2542120937061273253}
   serializedVersion: 2
   m_LocalRotation: {x: -0.000000037748947, y: 0.00000004371139, z: 1.7112913e-15, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 325, y: 325, z: 325}
+  m_LocalPosition: {x: 0, y: 4.2, z: 0}
+  m_LocalScale: {x: 330.00003, y: 330.00003, z: 330.00003}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1397973405936383663}
@@ -713,7 +714,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8e6801475926bbb4bb90d49b9ae54276, type: 2}
+  - {fileID: 2100000, guid: ba731ed383156e244a04ebd700723207, type: 2}
   - {fileID: 2100000, guid: 66d99f6fe4edd964888ff9f648763787, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -736,6 +737,28 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &4466094934660232599
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2542120937061273253}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5902401574945999192, guid: 57180fa2723f02442b3180542bc3dd99, type: 3}
 --- !u!1 &2586619131407807962
 GameObject:
   m_ObjectHideFlags: 0

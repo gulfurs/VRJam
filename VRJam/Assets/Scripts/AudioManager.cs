@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance; // Singleton instance
+    public static AudioManager instance;
 
-    private AudioSource audioSource;
+    public AudioSource musicSource;  
+    public AudioSource sfxSource;    
 
-    // Public AudioClips that can be assigned directly in the Inspector
     public AudioClip walkoutmusic;
     public AudioClip walkoutsound;
     public AudioClip Right;
@@ -18,73 +18,85 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        // Singleton pattern to ensure only one instance of the AudioManager exists
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject); // Keep AudioManager between scenes
+            DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Destroy(gameObject); // Destroy duplicate AudioManager instances
+            Destroy(gameObject);
         }
     }
 
     private void Start()
     {
-        // Set up an AudioSource on the AudioManager (can be on the same GameObject)
-        audioSource = GetComponent<AudioSource>();
-
-        if (audioSource == null)
+        if (musicSource == null || sfxSource == null)
         {
-            Debug.LogError("No AudioSource found on AudioManager. Please attach one.");
+            Debug.LogError("No AudioSources found on AudioManager. Please attach both musicSource and sfxSource.");
         }
     }
 
-    // Methods to play each specific sound clip
-    public void PlayWalkoutmusic()
+    public void PlayWalkoutMusic()
     {
-        audioSource.loop = false;
-        PlayClip(walkoutmusic);
+        if (musicSource != null)
+        {
+            musicSource.loop = false;
+            PlayClip(musicSource, walkoutmusic);
+        }
     }
 
     public void PlayWalkoutSound()
     {
-        audioSource.loop = false;
-        PlayClip(walkoutsound);
+        if (sfxSource != null)
+        {
+            sfxSource.loop = false;
+            PlayClip(sfxSource, walkoutsound);
+        }
     }
 
     public void PlayRight()
     {
-        audioSource.loop = false;
-        PlayClip(Right);
+        if (sfxSource != null)
+        {
+            sfxSource.loop = false;
+            PlayClip(sfxSource, Right);
+        }
     }
 
     public void PlayWrong()
     {
-        audioSource.loop = false;
-        PlayClip(Wrong);
+        if (sfxSource != null)
+        {
+            sfxSource.loop = false;
+            PlayClip(sfxSource, Wrong);
+        }
     }
 
     public void PlayBackgroundMusic()
     {
-        audioSource.loop = true;
-        PlayClip(BackgroundMusic);
+        if (musicSource != null)
+        {
+            musicSource.loop = true;
+            PlayClip(musicSource, BackgroundMusic);
+        }
     }
 
     public void PlayBackgroundNoise()
     {
-        audioSource.loop = true;
-        PlayClip(BackgroundNoise);
+        if (musicSource != null)
+        {
+            musicSource.loop = true;
+            PlayClip(musicSource, BackgroundNoise);
+        }
     }
 
-    // Private helper method to play a given AudioClip
-    private void PlayClip(AudioClip clip)
+    private void PlayClip(AudioSource source, AudioClip clip)
     {
-        if (audioSource != null && clip != null)
+        if (source != null && clip != null)
         {
-            audioSource.clip = clip;
-            audioSource.Play();
+            source.clip = clip;
+            source.Play();
         }
         else
         {

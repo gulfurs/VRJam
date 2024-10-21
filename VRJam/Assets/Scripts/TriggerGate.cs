@@ -8,6 +8,8 @@ public class TriggerGate : MonoBehaviour
 
     private Animator gateAnimator;
 
+    public AudienceMovement entry;
+
     private void Start()
     {
         gateAnimator = gate.GetComponent<Animator>();
@@ -20,6 +22,7 @@ public class TriggerGate : MonoBehaviour
             if (gateAnimator != null)
             {
                 gateAnimator.SetTrigger("gateTrigger");
+                entry.Entry();
             }
         }
     }

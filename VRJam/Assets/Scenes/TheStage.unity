@@ -258,9 +258,9 @@ Transform:
   m_GameObject: {fileID: 249047002}
   serializedVersion: 2
   m_LocalRotation: {x: 0.000000037748947, y: -0.00000004371139, z: -1.7112913e-15, w: 1}
-  m_LocalPosition: {x: -0, y: -0.00315, z: -0}
-  m_LocalScale: {x: 0.0030303027, y: 0.0030303027, z: 0.0030303027}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: -0.00315, z: -0.01136}
+  m_LocalScale: {x: 0.0070478776, y: 0.0070478776, z: 0.0070478776}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 497034990}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -277,6 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gate: {fileID: 497034989}
+  entry: {fileID: 1165422095}
 --- !u!65 &249047005
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -662,7 +663,7 @@ Transform:
   m_GameObject: {fileID: 750966861}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.4, y: 21.82, z: 221.21}
+  m_LocalPosition: {x: -3.4, y: 21.82, z: 32.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1129,6 +1130,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1165422093}
   - component: {fileID: 1165422094}
+  - component: {fileID: 1165422095}
   m_Layer: 0
   m_Name: Audienceholder
   m_TagString: Untagged
@@ -1145,7 +1147,7 @@ Transform:
   m_GameObject: {fileID: 1165422092}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.64, y: 8.49, z: 128.91}
+  m_LocalPosition: {x: 0, y: 8.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1165,7 +1167,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audiencePrefab: {fileID: 1599688202}
-  center: {x: 30, y: 0, z: 195}
+  center: {x: 0, y: 0, z: 0}
   radius: 65
   radiusInc: 5
   numberOfSeats: 66
@@ -1175,6 +1177,21 @@ MonoBehaviour:
   startHeight: 9
   randomnes: 0.7
   tiltRange: 10
+--- !u!114 &1165422095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165422092}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01f902178cd27d49b73436efc8813db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Audienceholder: []
+  jumpHeight: 2
+  jumpSpeed: 2
 --- !u!1 &1227130486
 GameObject:
   m_ObjectHideFlags: 0
@@ -1560,6 +1577,10 @@ PrefabInstance:
       propertyPath: walkoutmusic
       value: 
       objectReference: {fileID: 8300000, guid: 909eafb31b23d474c9a13c073d6dd08c, type: 3}
+    - target: {fileID: 2722225749853174995, guid: c33cf4f72986373458b163bbc93a1ee1, type: 3}
+      propertyPath: BackgroundMusic
+      value: 
+      objectReference: {fileID: 8300000, guid: bd01adf2c857507449e482d3557f6626, type: 3}
     - target: {fileID: 7756687676440222388, guid: c33cf4f72986373458b163bbc93a1ee1, type: 3}
       propertyPath: m_Name
       value: AudioManager
@@ -2313,7 +2334,7 @@ GameObject:
   - component: {fileID: 1569595242}
   m_Layer: 0
   m_Name: XR Origin (XR Rig)
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2813,7 +2834,7 @@ Transform:
   m_GameObject: {fileID: 1764124141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28.9, y: 7, z: 194.7}
+  m_LocalPosition: {x: 0, y: 7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3573,7 +3594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7843173312645501321, guid: 2f73bb4e79f836540af21d217291c2f8, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 117
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7843173312645501321, guid: 2f73bb4e79f836540af21d217291c2f8, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3669,6 +3690,10 @@ PrefabInstance:
     - target: {fileID: 2919312052194475472, guid: e1235e895acd85a46a80082a703f6a98, type: 3}
       propertyPath: m_Name
       value: stadium fbx
+      objectReference: {fileID: 0}
+    - target: {fileID: 2919312052194475472, guid: e1235e895acd85a46a80082a703f6a98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3417089605640006915, guid: e1235e895acd85a46a80082a703f6a98, type: 3}
       propertyPath: m_IsActive

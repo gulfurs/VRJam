@@ -23,20 +23,38 @@ public class SentenceCreation : MonoBehaviour
     private int lettersRevealed = 0;
     private SentenceData currentSentence;
 
-    public InputActionProperty RevealLetter_XR;
-    public InputActionProperty ConfirmAction_XR;
+    public InputActionAsset actionAsset;
+    //public InputActionProperty RevealLetter_XR;
+    //public InputActionProperty ConfirmAction_XR;
+
+    private InputAction revealAction;
+    private InputAction confirmAction;
+    
     public UnityConnection unityConnection;
 
     void OnEnable()
     {
-        RevealLetter_XR.action.performed += RevealNextLetter;
-        ConfirmAction_XR.action.performed += ConfirmGuess;
+        var actionMap = actionAsset.FindActionMap("XRActionMap"); // Replace with your actual action map name
+        revealAction = actionMap.FindAction("RevealLetter_XR");  // Replace with your actual action name
+        confirmAction = actionMap.FindAction("ConfirmAction_XR"); // Replace with your actual action name
+
+        // Subscribe to the actions
+        revealAction.performed += RevealNextLetter;
+        confirmAction.performed += ConfirmGuess;
+
+        // Enable the actions
+        revealAction.Enable();
+        confirmAction.Enable();
     }
 
     void OnDisable()
     {
-        RevealLetter_XR.action.performed -= RevealNextLetter;
-        ConfirmAction_XR.action.performed -= ConfirmGuess;
+        revealAction.performed -= RevealNextLetter;
+        confirmAction.performed -= ConfirmGuess;
+
+        // Disable the actions
+        revealAction.Disable();
+        confirmAction.Disable();
     }
 
     void Start()

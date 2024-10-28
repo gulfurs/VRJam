@@ -1771,6 +1771,7 @@ MonoBehaviour:
     missingWord: welcome
   sentenceDisplay: {fileID: 932487256}
   revealDisplay: {fileID: 1060900090}
+  actionAsset: {fileID: -944628639613478452, guid: 4e6c388809b0ed943aa135bd00ad3bd5, type: 3}
   unityConnection: {fileID: 1680179260}
 --- !u!4 &1254777984
 Transform:

@@ -22,3 +22,9 @@ Welcome to the **Reverse Spelling Bee VR** project! 🎉 This is a unique and in
 4. If correct, 🎉 WIN! If not... try again! 😜
 
 ![Bee gif](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExNW5udWdzc2Vzbm9ob3JudWhtaHBrcjZiem53Ym5weHNndzVwaGc3MyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/cJ4yFzi04lF7i/giphy.gif)
+
+
+Installing Dependencies:
+, You can run the following command in your terminal or command prompt:
+
+pip install -r requirements.txt

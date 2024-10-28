@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+using UnityEngine.InputSystem;
+
 public class SentenceCreation : MonoBehaviour
 {
     [System.Serializable]
@@ -24,7 +26,21 @@ public class SentenceCreation : MonoBehaviour
     private int lettersRevealed = 0;
     private SentenceData currentSentence;
 
+    public InputActionProperty RevealLetter_XR; 
+    public InputActionProperty ConfirmAction_XR; 
     public UnityConnection unityConnection;
+
+    void OnEnable()
+    {
+        RevealLetter_XR.action.performed += RevealNextLetter;
+        ConfirmAction_XR.action.performed += ConfirmGuess;
+    }
+
+    void OnDisable()
+    {
+        RevealLetter_XR.action.performed -= RevealNextLetter;
+        ConfirmAction_XR.action.performed -= ConfirmGuess;
+    }
 
     void Start(){
         LoadCurrentSentence();
@@ -63,7 +79,7 @@ public class SentenceCreation : MonoBehaviour
         revealDisplay.text = currentSentence.missingWord.Substring(0, lettersRevealed).PadRight(currentSentence.missingWord.Length, '_');
     }
 
-    void RevealNextLetter(){
+    private void RevealNextLetter(InputAction.CallbackContext context){
         // Reveal the next letter if any are left
         if (lettersRevealed < currentSentence.missingWord.Length)
         {
@@ -73,8 +89,9 @@ public class SentenceCreation : MonoBehaviour
         }
     }
 
-    void ConfirmGuess(string transcription)
+    private void ConfirmGuess(InputAction.CallbackContext context)
     {
+        string transcription = unityConnection.transcription;
         // Check if the transcription input matches the missing word
         if (string.IsNullOrEmpty(transcription))
         {

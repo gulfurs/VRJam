@@ -1,0 +1,60 @@
+{
+    "name": "XRcontrols",
+    "maps": [
+        {
+            "name": "XRActionMap",
+            "id": "0353500c-5e90-4e75-8c4b-3899d533a956",
+            "actions": [
+                {
+                    "name": "RevealLetter_XR",
+                    "type": "Button",
+                    "id": "63e5b6e2-3ca7-423e-93ef-df1d99dea173",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConfirmAction_XR",
+                    "type": "Value",
+                    "id": "2e8f8fb1-ef36-46c0-9be4-676920399998",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "a7b4a9f7-670e-4efd-a007-64629eccba72",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XRControls",
+                    "action": "RevealLetter_XR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f6d85da6-66f2-4ea1-aaf2-f5a91e4a2450",
+                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "XRControls",
+                    "action": "ConfirmAction_XR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "XRControls",
+            "bindingGroup": "XRControls",
+            "devices": []
+        }
+    ]
+}

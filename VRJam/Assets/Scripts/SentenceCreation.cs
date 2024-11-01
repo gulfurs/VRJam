@@ -20,7 +20,8 @@ public class SentenceCreation : MonoBehaviour
     public TextMeshPro revealDisplay;
 
     private int currentSentenceIndex = 0;
-    private int lettersRevealed = 0;
+    //private int lettersRevealed = 0;
+    private List<int> revealedIndices = new List<int>();
     private SentenceData currentSentence;
 
     public InputActionAsset actionAsset;
@@ -79,7 +80,8 @@ public class SentenceCreation : MonoBehaviour
     void LoadCurrentSentence()
     {
         currentSentence = sentences[currentSentenceIndex];
-        lettersRevealed = 0;
+        //lettersRevealed = 0;
+        revealedIndices.Clear();
         UpdateRevealDisplay();
         UpdateSentenceDisplay();
     }
@@ -91,7 +93,16 @@ public class SentenceCreation : MonoBehaviour
 
     void UpdateRevealDisplay()
     {
-        revealDisplay.text = currentSentence.missingWord.Substring(0, lettersRevealed).PadRight(currentSentence.missingWord.Length, '_');
+        //revealDisplay.text = currentSentence.missingWord.Substring(0, lettersRevealed).PadRight(currentSentence.missingWord.Length, '_');
+        char[] revealArray = new string('_', currentSentence.missingWord.Length).ToCharArray();
+        
+        // Place revealed letters at their indices
+        foreach (int index in revealedIndices)
+        {
+            revealArray[index] = currentSentence.missingWord[index];
+        }
+
+        revealDisplay.text = new string(revealArray);
     }
 
     // Method for Input System callbacks
@@ -103,9 +114,18 @@ public class SentenceCreation : MonoBehaviour
     // Direct method for legacy input
     private void RevealNextLetterDirect()
     {
-        if (lettersRevealed < currentSentence.missingWord.Length)
+        if (revealedIndices.Count < currentSentence.missingWord.Length)
         {
-            lettersRevealed++;
+            int randomIndex;
+            // Pick a random index that hasn't been revealed yet
+            do
+            {
+                randomIndex = Random.Range(0, currentSentence.missingWord.Length);
+            }
+            while (revealedIndices.Contains(randomIndex));
+
+            revealedIndices.Add(randomIndex);
+
             UpdateRevealDisplay();
             UpdateSentenceDisplay();
         }

@@ -1768,7 +1768,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - sentenceTemplate: In ancient Rome, gladiators would often fight in the ___.
-    missingWord: welcome
+    missingWord: Colosseum
+  - sentenceTemplate: The scientist carefully observed the tiny organisms under the
+      ___.
+    missingWord: Microscope
+  - sentenceTemplate: The airline offers ___ flights between major cities.
+    missingWord: Intercontinental
+  - sentenceTemplate: They are studying ___ at school to start their own company.
+    missingWord: Business
   sentenceDisplay: {fileID: 932487256}
   revealDisplay: {fileID: 1060900090}
   actionAsset: {fileID: -944628639613478452, guid: 4e6c388809b0ed943aa135bd00ad3bd5, type: 3}

@@ -56,20 +56,26 @@ public class AudienceMovement : MonoBehaviour
 
     IEnumerator Jump(GameObject audienceMember)
     {
+
+        float randomJumpHeight = jumpHeight * Random.Range(0.8f, 1.2f);
+        float randomJumpSpeed = jumpSpeed * Random.Range(0.8f, 1.2f);
+
         Vector3 startPosition = audienceMember.transform.position;
         Vector3 jumpPosition = new Vector3(startPosition.x, startPosition.y + jumpHeight, startPosition.z);
 
         while (isJumping)
         {
+
+            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
             while (audienceMember.transform.position.y < jumpPosition.y && isJumping)
             {
-                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, jumpPosition, jumpSpeed * Time.deltaTime);
+                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, jumpPosition, randomJumpSpeed * Time.deltaTime);
                 yield return null;
             }
 
             while (audienceMember.transform.position.y > startPosition.y && isJumping)
             {
-                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, startPosition, jumpSpeed * Time.deltaTime);
+                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, startPosition, randomJumpSpeed * Time.deltaTime);
                 yield return null;
             }
 

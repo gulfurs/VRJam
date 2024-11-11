@@ -3255,7 +3255,7 @@ Transform:
   m_GameObject: {fileID: 1764124141}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3277,12 +3277,12 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
+  Spatialize: 1
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 100
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -3292,8 +3292,8 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 1
+      time: 0.051948547
+      value: 0.10646057
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3301,17 +3301,17 @@ AudioSource:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.7864013
-      value: 0.7440367
-      inSlope: -1.3842038
-      outSlope: -1.3842038
+      time: 0.6244445
+      value: 0.9741926
+      inSlope: 0.96139705
+      outSlope: 0.96139705
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.24733454
     - serializedVersion: 3
-      time: 1
-      value: 0
+      time: 0.99694824
+      value: 1.0740509
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -3341,7 +3341,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0.055555556
+      value: 0.125
       inSlope: 0
       outSlope: 0
       tangentMode: 0

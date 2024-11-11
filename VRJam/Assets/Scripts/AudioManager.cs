@@ -13,8 +13,9 @@ public class AudioManager : MonoBehaviour
     public AudioClip walkoutsound;
     public AudioClip Right;
     public AudioClip Wrong;
-    public AudioClip BackgroundMusic;
+    //public AudioClip BackgroundMusic;
     public AudioClip BackgroundNoise;
+    public AudioClip audienceNoise; 
 
     private void Awake()
     {
@@ -55,6 +56,22 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    private IEnumerator PlayAudienceNoiseAfterWalkout()
+    {
+        yield return new WaitForSeconds(walkoutsound.length);
+
+        PlayAudienceNoise();
+    }
+
+    private void PlayAudienceNoise()
+    {
+        if (sfxSource != null)
+        {
+            sfxSource.loop = false;
+            PlayClip(sfxSource, audienceNoise);
+        }
+    }
+
     public void PlayRight()
     {
         if (sfxSource != null)
@@ -73,14 +90,14 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlayBackgroundMusic()
+   /* public void PlayBackgroundMusic()
     {
         if (musicSource != null)
         {
             musicSource.loop = true;
             PlayClip(musicSource, BackgroundMusic);
         }
-    }
+    }*/
 
     public void PlayBackgroundNoise()
     {

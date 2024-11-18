@@ -18,6 +18,7 @@ public class SentenceCreation : MonoBehaviour
     public List<SentenceData> sentences = new List<SentenceData>();
     public TextMeshPro sentenceDisplay;
     public TextMeshPro revealDisplay;
+    public TextMeshPro GuessDisplay;
 
     private int currentSentenceIndex = 0;
     //private int lettersRevealed = 0;
@@ -144,6 +145,7 @@ public class SentenceCreation : MonoBehaviour
         if (string.IsNullOrEmpty(transcription))
         {
             Debug.Log("Please speak your guess first.");
+            GuessDisplay.text = "Please speak your guess first.";
             return;
         }
 
@@ -152,11 +154,13 @@ public class SentenceCreation : MonoBehaviour
         if (isCorrect)
         {
             Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
+            GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
             NextSentence();
         }
         else
         {
             Debug.Log("Incorrect. Try again.");
+            GuessDisplay.text = "Incorrect. Try again.";
         }
     }
 
@@ -170,6 +174,7 @@ public class SentenceCreation : MonoBehaviour
         else
         {
             Debug.Log("You've completed all sentences!");
+            GuessDisplay.text = "You've completed all sentences!";
         }
     }
 }

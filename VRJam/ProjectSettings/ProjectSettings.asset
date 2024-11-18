@@ -170,7 +170,7 @@ PlayerSettings:
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 22
   AndroidTargetSdkVersion: 0
-  AndroidPreferredInstallLocation: 1
+  AndroidPreferredInstallLocation: 0
   aotOptions: 
   stripEngineCode: 1
   iPhoneStrippingLevel: 0
@@ -738,20 +738,23 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;EXTOSC
-    EmbeddedLinux: EXTOSC
-    GameCoreXboxOne: EXTOSC
-    Nintendo Switch: EXTOSC
-    PS4: EXTOSC
-    PS5: EXTOSC
-    QNX: EXTOSC
-    Stadia: EXTOSC
-    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;EXTOSC
-    VisionOS: EXTOSC
-    WebGL: EXTOSC
-    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS
-    XboxOne: EXTOSC
-    tvOS: EXTOSC
+    Android: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;EXTOSC;DOTWEEN
+    EmbeddedLinux: EXTOSC;DOTWEEN
+    GameCoreScarlett: DOTWEEN
+    GameCoreXboxOne: EXTOSC;DOTWEEN
+    LinuxHeadlessSimulation: DOTWEEN
+    Nintendo Switch: EXTOSC;DOTWEEN
+    PS4: EXTOSC;DOTWEEN
+    PS5: EXTOSC;DOTWEEN
+    QNX: EXTOSC;DOTWEEN
+    Stadia: EXTOSC;DOTWEEN
+    Standalone: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;EXTOSC;DOTWEEN
+    VisionOS: EXTOSC;DOTWEEN
+    WebGL: EXTOSC;DOTWEEN
+    Windows Store Apps: USE_INPUT_SYSTEM_POSE_CONTROL;USE_STICK_CONTROL_THUMBSTICKS;DOTWEEN
+    XboxOne: EXTOSC;DOTWEEN
+    iPhone: DOTWEEN
+    tvOS: EXTOSC;DOTWEEN
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

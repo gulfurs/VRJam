@@ -2743,6 +2743,7 @@ GameObject:
   - component: {fileID: 1523878681}
   - component: {fileID: 1523878683}
   - component: {fileID: 1523878682}
+  - component: {fileID: 1523878684}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -2809,6 +2810,20 @@ MonoBehaviour:
   attackCooldown: 2
   dmg: 10
   maxHP: 100
+--- !u!114 &1523878684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523878680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83e4e6cca11330d4088d729ab4fc9d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StartingHoverFilters: []
+  m_StartingSelectFilters: []
 --- !u!1 &1549936224
 GameObject:
   m_ObjectHideFlags: 0
@@ -4484,5 +4499,5 @@ SceneRoots:
   - {fileID: 1254777984}
   - {fileID: 1319692064}
   - {fileID: 2060851807}
-  - {fileID: 807748097}
   - {fileID: 1523878681}
+  - {fileID: 807748097}

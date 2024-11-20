@@ -161,6 +161,10 @@ public class SentenceCreation : MonoBehaviour
         {
             Debug.Log("Incorrect. Try again.");
             GuessDisplay.text = "Incorrect. Try again.";
+            Enemy enemyController = FindObjectOfType<Enemy>();
+            if (enemyController != null){
+                    enemyController.ReleaseEnemy();
+                }
         }
     }
 

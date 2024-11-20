@@ -7,12 +7,16 @@ public class TriggerGate : MonoBehaviour
     public GameObject gate;
 
     private Animator gateAnimator;
+    private AudioManager audioManager;
 
     public AudienceMovement entry;
 
     private void Start()
     {
         gateAnimator = gate.GetComponent<Animator>();
+        audioManager = AudioManager.instance;
+
+        if (audioManager == null){Debug.LogError("AudioManager instance not found.");}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -22,6 +26,8 @@ public class TriggerGate : MonoBehaviour
             if (gateAnimator != null)
             {
                 gateAnimator.SetTrigger("gateTrigger");
+                audioManager.PlayWalkoutMusic();
+                audioManager.PlayWalkoutSound();
                 entry.Entry();
             }
         }

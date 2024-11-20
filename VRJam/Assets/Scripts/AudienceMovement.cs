@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class AudienceMovement : MonoBehaviour
 {
-    public float jumpHeight = 2.0f;
-    public float jumpSpeed = 2.0f;
+    public float baseJumpHeight = 1.5f;
+    public float baseJumpDuration = 0.5f;
+    public float jumpFrequency = 1f;
+    public AnimationCurve jumpCurve;
 
-    private AudioManager audioManager;
-    private bool isJumping = false;
+    private bool isJumping = true;
+    private bool shouldStop = false;
 
     void Start()
     {
-        audioManager = AudioManager.instance;
-
-        if (audioManager == null)
+        // Initialize jump curve if not set in inspector
+        if (jumpCurve == null || jumpCurve.length == 0)
         {
-            Debug.LogError("AudioManager instance not found.");
+            jumpCurve = new AnimationCurve(
+                new Keyframe(0, 0),
+                new Keyframe(0.5f, 1),
+                new Keyframe(1, 0)
+            );
         }
+
+        Entry();
     }
 
     public void Entry()
@@ -26,12 +33,12 @@ public class AudienceMovement : MonoBehaviour
 
         if (audienceMembers.Length > 0)
         {
-            if (audioManager != null && audioManager.walkoutmusic != null)
-            {
-                audioManager.PlayWalkoutMusic();
-                audioManager.PlayWalkoutSound();
+            isJumping = true;
+            shouldStop = false;
 
-                StartCoroutine(HandleJumping(audienceMembers, audioManager.walkoutmusic.length));
+            foreach (GameObject audienceMember in audienceMembers)
+            {
+                StartCoroutine(ContinuousJumping(audienceMember));
             }
         }
         else
@@ -40,46 +47,65 @@ public class AudienceMovement : MonoBehaviour
         }
     }
 
-    IEnumerator HandleJumping(GameObject[] audienceMembers, float musicDuration)
+    public void StopJumping()
     {
-        isJumping = true;
-
-        foreach (GameObject audienceMember in audienceMembers)
-        {
-            StartCoroutine(Jump(audienceMember));
-        }
-
-        yield return new WaitForSeconds(musicDuration);
-
-        isJumping = false;
+        shouldStop = true;
     }
 
-    IEnumerator Jump(GameObject audienceMember)
+    IEnumerator ContinuousJumping(GameObject audienceMember)
     {
 
-        float randomJumpHeight = jumpHeight * Random.Range(0.8f, 1.2f);
-        float randomJumpSpeed = jumpSpeed * Random.Range(0.8f, 1.2f);
-
-        Vector3 startPosition = audienceMember.transform.position;
-        Vector3 jumpPosition = new Vector3(startPosition.x, startPosition.y + jumpHeight, startPosition.z);
-
-        while (isJumping)
+        Vector3 basePosition = audienceMember.transform.position;
+        while (isJumping && !shouldStop)
         {
+            // Randomize jump parameters for more natural variation
+            float randomHeightFactor = Random.Range(0.85f, 1.15f);
+            float randomDurationFactor = Random.Range(0.8f, 1.2f);
+            float randomFrequencyVariation = Random.Range(0.9f, 1.1f);
 
-            yield return new WaitForSeconds(Random.Range(0.1f, 0.5f));
-            while (audienceMember.transform.position.y < jumpPosition.y && isJumping)
-            {
-                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, jumpPosition, randomJumpSpeed * Time.deltaTime);
-                yield return null;
-            }
+            yield return StartCoroutine(RealisticJump(
+                audienceMember, 
+                basePosition,
+                baseJumpHeight * randomHeightFactor, 
+                baseJumpDuration * randomDurationFactor,
+                jumpFrequency * randomFrequencyVariation
+            ));
+        }
 
-            while (audienceMember.transform.position.y > startPosition.y && isJumping)
-            {
-                audienceMember.transform.position = Vector3.MoveTowards(audienceMember.transform.position, startPosition, randomJumpSpeed * Time.deltaTime);
-                yield return null;
-            }
+        // Optional: Reset position when stopping
+        /*audienceMember.transform.position = new Vector3(
+            audienceMember.transform.position.x, 
+            audienceMember.transform.position.y - baseJumpHeight, 
+            audienceMember.transform.position.z
+        );*/
+        audienceMember.transform.position = basePosition - new Vector3(0, baseJumpHeight, 0);
+    }
 
+    IEnumerator RealisticJump(GameObject audienceMember, Vector3 basePosition, float jumpHeight, float jumpDuration, float frequency)
+    {
+        //Vector3 startPosition = audienceMember.transform.position;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < jumpDuration)
+        {
+            // Use animation curve for smooth, realistic jump arc
+            float jumpProgress = elapsedTime / jumpDuration;
+            float verticalOffset = jumpCurve.Evaluate(jumpProgress) * jumpHeight;
+
+            audienceMember.transform.position = new Vector3(
+                basePosition.x, 
+                basePosition.y + verticalOffset, 
+                basePosition.z
+            );
+
+            elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+        // Snap back to original position
+        audienceMember.transform.position = basePosition;
+
+        // Wait before next jump
+        yield return new WaitForSeconds(1f / frequency);
     }
 }

@@ -31,32 +31,38 @@ public class SentenceCreation : MonoBehaviour
 
     private InputAction revealAction;
     private InputAction confirmAction;
+    private InputAction startRec;
     
     public UnityConnection unityConnection;
 
     void OnEnable()
     {
-        var actionMap = actionAsset.FindActionMap("XRActionMap"); // Replace with your actual action map name
-        revealAction = actionMap.FindAction("RevealLetter_XR");  // Replace with your actual action name
-        confirmAction = actionMap.FindAction("ConfirmAction_XR"); // Replace with your actual action name
+        var actionMap = actionAsset.FindActionMap("XRActionMap"); 
+        revealAction = actionMap.FindAction("RevealLetter_XR");  
+        confirmAction = actionMap.FindAction("ConfirmAction_XR"); 
+        startRec = actionMap.FindAction("StartRec_XR");
 
         // Subscribe to the actions
         revealAction.performed += RevealNextLetter;
         confirmAction.performed += ConfirmGuess;
+        startRec.performed += StartRecording;
 
         // Enable the actions
         revealAction.Enable();
         confirmAction.Enable();
+        startRec.Enable();
     }
 
     void OnDisable()
     {
         revealAction.performed -= RevealNextLetter;
         confirmAction.performed -= ConfirmGuess;
+        startRec.performed -= StartRecording;
 
         // Disable the actions
         revealAction.Disable();
         confirmAction.Disable();
+        startRec.Disable();
     }
 
     void Start()
@@ -181,4 +187,9 @@ public class SentenceCreation : MonoBehaviour
             GuessDisplay.text = "You've completed all sentences!";
         }
     }
+    private void StartRecording(InputAction.CallbackContext context)
+    {
+        unityConnection.StartTranscriptionProcess();
+    }
+    
 }

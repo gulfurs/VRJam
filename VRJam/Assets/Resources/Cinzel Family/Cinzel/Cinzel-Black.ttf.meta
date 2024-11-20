@@ -10,7 +10,12 @@ TrueTypeFontImporter:
   includeFontData: 1
   fontNames:
   - Cinzel
-  fallbackFontReferences: []
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: d7a41b337403b9944a7b3fd95b3d9043, type: 3}
+  - {fileID: 12800000, guid: 62940746044e44b4e8a92cab6c9c1239, type: 3}
+  - {fileID: 12800000, guid: 396750b8158d9564f9642284dd656cdd, type: 3}
+  - {fileID: 12800000, guid: 04dcdbb7edac88c4e8a0e2240f964d03, type: 3}
+  - {fileID: 12800000, guid: c11485baeaf38fb4ab4a7c6f547aae04, type: 3}
   customCharacters: 
   fontRenderingMode: 0
   ascentCalculationMode: 1

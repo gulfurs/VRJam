@@ -26,14 +26,16 @@ public class SentenceCreation : MonoBehaviour
     private SentenceData currentSentence;
 
     public InputActionAsset actionAsset;
-    //public InputActionProperty RevealLetter_XR;
-    //public InputActionProperty ConfirmAction_XR;
 
     private InputAction revealAction;
     private InputAction confirmAction;
     private InputAction startRec;
     
     public UnityConnection unityConnection;
+    private AudioManager audioManager;
+    public Enemy enemyController;
+
+    private bool enemySummoned = false;
 
     void OnEnable()
     {
@@ -68,6 +70,12 @@ public class SentenceCreation : MonoBehaviour
     void Start()
     {
         LoadCurrentSentence();
+
+        audioManager = AudioManager.instance;
+        enemyController = FindObjectOfType<Enemy>();
+
+        if (audioManager == null){Debug.LogError("AudioManager instance not found.");}
+        if (enemyController == null){Debug.LogError("Enemy controller not found.");}
     }
 
     void Update()
@@ -136,6 +144,18 @@ public class SentenceCreation : MonoBehaviour
             UpdateRevealDisplay();
             UpdateSentenceDisplay();
         }
+        if (revealedIndices.Count == currentSentence.missingWord.Length)
+        {
+            SummonEnemy();
+        }
+    }
+    void SummonEnemy(){
+        if (!enemySummoned && enemyController != null)
+        {
+            enemySummoned = true;
+            GuessDisplay.text = "Enemy Summoned! Defeat them in combat!";
+            enemyController.ReleaseEnemy();
+        }
     }
 
     // Method for Input System callbacks
@@ -147,6 +167,12 @@ public class SentenceCreation : MonoBehaviour
     // Direct method for legacy input
     private void ConfirmGuessDirect()
     {
+        if (enemySummoned && enemyController != null && enemyController.IsDead())
+        {
+            NextSentence();
+            return;
+        }
+
         string transcription = unityConnection.transcription;
         if (string.IsNullOrEmpty(transcription))
         {
@@ -161,13 +187,15 @@ public class SentenceCreation : MonoBehaviour
         {
             Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
             GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
+            audioManager.PlayRight();
             NextSentence();
         }
         else
         {
             Debug.Log("Incorrect. Try again.");
             GuessDisplay.text = "Incorrect. Try again.";
-            Enemy enemyController = FindObjectOfType<Enemy>();
+            audioManager.PlayWrong();
+            //Enemy enemyController = FindObjectOfType<Enemy>();
             if (enemyController != null){
                     enemyController.ReleaseEnemy();
                 }
@@ -187,6 +215,7 @@ public class SentenceCreation : MonoBehaviour
             GuessDisplay.text = "You've completed all sentences!";
         }
     }
+
     private void StartRecording(InputAction.CallbackContext context)
     {
         unityConnection.StartTranscriptionProcess();

@@ -121,6 +121,11 @@ public class Enemy : MonoBehaviour
 
         Invoke("Vanish", 2f);
     }
+    
+    public bool IsDead()
+    {
+        return currentHP <= 0;
+    }
 
     void Vanish(){
         gameObject.SetActive(false);

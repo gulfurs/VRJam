@@ -16,13 +16,9 @@ public class Enemy : MonoBehaviour
     public float damage = 10f;             
     public int maxHP = 100;                
 
-    [Header("Animations")]
-    private const string ENEMY_WALK = "Walk";
-    private const string ENEMY_ATTACK = "Attack";
-    private const string ENEMY_IDLE = "Idle";
-
     private enum EnemyState { Idle, Chasing, Attacking }
     private EnemyState currentState = EnemyState.Idle;
+    private static readonly int StateParam = Animator.StringToHash("State");
 
     private float lastAttackTime;                
     private int currentHP;                       
@@ -46,7 +42,8 @@ public class Enemy : MonoBehaviour
         transform.position = startPosition;  // Reset position to the starting point
         currentHP = maxHP;                   // Reset health
         agent.isStopped = false;             // Ensure NavMeshAgent is active
-        animator.SetBool(ENEMY_WALK, false); // Reset animations
+        animator.SetFloat(StateParam, 0);
+        //animator.SetBool(ENEMY_WALK, false); 
         gameObject.SetActive(true);          
         currentState = EnemyState.Chasing;   // Start chasing immediately
     }
@@ -63,6 +60,9 @@ public class Enemy : MonoBehaviour
             case EnemyState.Attacking:
                 AttackPlayer(distanceToPlayer);
                 break;
+            case EnemyState.Idle:
+                animator.SetFloat(StateParam, 0);
+                break;
         }
     }
 
@@ -72,12 +72,14 @@ public class Enemy : MonoBehaviour
         {
             currentState = EnemyState.Attacking;
             agent.isStopped = true;
-            animator.SetTrigger(ENEMY_ATTACK);
+            //animator.SetTrigger(ENEMY_ATTACK);
+            animator.SetFloat(StateParam, 2);
             return;
         }
 
         agent.SetDestination(player.position);
-        animator.SetBool(ENEMY_WALK, true);
+        //animator.SetBool(ENEMY_WALK, true);
+        animator.SetFloat(StateParam, 1);
     }
 
     void AttackPlayer(float distance)
@@ -86,6 +88,7 @@ public class Enemy : MonoBehaviour
         {
             currentState = EnemyState.Chasing;  // Return to chasing if the player moves away
             agent.isStopped = false;
+            animator.SetFloat(StateParam, 1);
             return;
         }
 
@@ -96,7 +99,8 @@ public class Enemy : MonoBehaviour
             {
                 playerHealth.TakeDmg(damage);
                 lastAttackTime = Time.time;  // Reset cooldown timer
-                animator.SetTrigger(ENEMY_ATTACK);
+                //animator.SetTrigger(ENEMY_ATTACK);
+                animator.SetFloat(StateParam, 2);
             }
         }
     }

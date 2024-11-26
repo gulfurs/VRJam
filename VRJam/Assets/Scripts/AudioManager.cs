@@ -67,7 +67,7 @@ public class AudioManager : MonoBehaviour
     {
         if (sfxSource != null)
         {
-            sfxSource.loop = false;
+            //sfxSource.loop = false;
             PlayClip(sfxSource, audienceNoise);
         }
     }

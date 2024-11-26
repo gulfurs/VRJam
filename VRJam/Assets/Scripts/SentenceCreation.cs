@@ -34,6 +34,8 @@ public class SentenceCreation : MonoBehaviour
     public UnityConnection unityConnection;
     private AudioManager audioManager;
     public Enemy enemyController;
+    public GameObject Sword;
+    //public Transform SwordSpawnPos;
 
     private bool enemySummoned = false;
 
@@ -84,6 +86,7 @@ public class SentenceCreation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             RevealNextLetterDirect();
+            SummonEnemy();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -155,6 +158,9 @@ public class SentenceCreation : MonoBehaviour
             enemySummoned = true;
             GuessDisplay.text = "Enemy Summoned! Defeat them in combat!";
             enemyController.ReleaseEnemy();
+
+            Sword.SetActive(true);
+            
         }
     }
 
@@ -196,9 +202,12 @@ public class SentenceCreation : MonoBehaviour
             GuessDisplay.text = "Incorrect. Try again.";
             audioManager.PlayWrong();
             //Enemy enemyController = FindObjectOfType<Enemy>();
-            if (enemyController != null){
+           /* if (enemyController != null){
+                    enemySummoned = true;
+                    GuessDisplay.text = "Enemy Summoned! Defeat them in combat!";
                     enemyController.ReleaseEnemy();
-                }
+                }*/
+            SummonEnemy();
         }
     }
 

@@ -121,6 +121,7 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.Idle;
 
         Invoke("ResetEnemy", 2f);  // Wait for death animation before resetting
+        sentenceCreation.Sword.SetActive(false);
     }
 
     void ResetEnemy()

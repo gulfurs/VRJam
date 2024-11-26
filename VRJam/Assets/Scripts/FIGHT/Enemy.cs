@@ -5,7 +5,6 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     [Header("References")]
-    public NavMeshAgent agent;           
     public Animator animator;           
     public Transform player;             
     public SentenceCreation sentenceCreation;  
@@ -22,11 +21,11 @@ public class Enemy : MonoBehaviour
 
     private float lastAttackTime;                
     private int currentHP;                       
-    private Vector3 startPosition;               // Store start position for respawning
+    private Vector3 startPosition;  
+    public float distanceToPlayer;   
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         sentenceCreation = FindObjectOfType<SentenceCreation>();
@@ -41,7 +40,6 @@ public class Enemy : MonoBehaviour
     {
         transform.position = startPosition;  // Reset position to the starting point
         currentHP = maxHP;                   // Reset health
-        agent.isStopped = false;             // Ensure NavMeshAgent is active
         animator.SetFloat(StateParam, 0);
         //animator.SetBool(ENEMY_WALK, false); 
         gameObject.SetActive(true);          
@@ -50,49 +48,23 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-        switch (currentState)
-        {
-            case EnemyState.Chasing:
-                ChasePlayer(distanceToPlayer);
-                break;
-            case EnemyState.Attacking:
-                AttackPlayer(distanceToPlayer);
-                break;
-            case EnemyState.Idle:
-                animator.SetFloat(StateParam, 0);
-                break;
-        }
-    }
+        ChasePlayer(distanceToPlayer);
+        AttackPlayer(distanceToPlayer);
+        //animator.SetFloat(StateParam, 0);
 
-    void ChasePlayer(float distance)
-    {
-        if (distance <= attackRange)
-        {
-            currentState = EnemyState.Attacking;
-            agent.isStopped = true;
-            //animator.SetTrigger(ENEMY_ATTACK);
-            animator.SetFloat(StateParam, 2);
-            return;
-        }
-
-        agent.SetDestination(player.position);
-        //animator.SetBool(ENEMY_WALK, true);
-        animator.SetFloat(StateParam, 1);
     }
 
     void AttackPlayer(float distance)
     {
-        if (distance > attackRange)
+        if (distance <= attackRange)
         {
-            currentState = EnemyState.Chasing;  // Return to chasing if the player moves away
-            agent.isStopped = false;
-            animator.SetFloat(StateParam, 1);
-            return;
-        }
-
-        if (Time.time >= lastAttackTime + attackCooldown)
+            currentState = EnemyState.Attacking;
+            //animator.SetTrigger(ENEMY_ATTACK);
+            animator.SetFloat(StateParam, 2);
+             Debug.Log("ATTACK ON RIVERDALE");
+             if (Time.time >= lastAttackTime + attackCooldown)
         {
             PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
             if (playerHealth != null)
@@ -102,6 +74,21 @@ public class Enemy : MonoBehaviour
                 //animator.SetTrigger(ENEMY_ATTACK);
                 animator.SetFloat(StateParam, 2);
             }
+        }
+            return;
+        }
+        //animator.SetBool(ENEMY_WALK, true);
+        animator.SetFloat(StateParam, 1);
+    }
+
+    void ChasePlayer(float distance)
+    {   
+        if (distance > attackRange)
+        {
+            currentState = EnemyState.Chasing;  // Return to chasing if the player moves away
+            animator.SetFloat(StateParam, 1);
+            Debug.Log("CHASE YOU!!");
+            return;
         }
     }
 
@@ -117,7 +104,6 @@ public class Enemy : MonoBehaviour
     void Die()
     {
         animator.SetTrigger("Die");
-        agent.isStopped = true;
         currentState = EnemyState.Idle;
 
         Invoke("ResetEnemy", 2f);  // Wait for death animation before resetting

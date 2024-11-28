@@ -186,7 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf39116cc6db44d47b2eaf534e0f6682, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MicrophoneIndex: 1
+  MicrophoneIndex: 2
   _minimumSpeakingSampleValue: 0.05
   _silenceTimer: 1
   _autoDetect: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41ba326f15540114a8fae8e3ad4795f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonAction: {fileID: 5788802855244013380, guid: c348712bda248c246b8c49b3db54643f, type: 3}
+  buttonAction: {fileID: -6131295136447488360, guid: c348712bda248c246b8c49b3db54643f, type: 3}
   getVoiceProcessor: {fileID: 0}
 --- !u!1 &51877935 stripped
 GameObject:
@@ -443,7 +443,6 @@ GameObject:
   - component: {fileID: 249047006}
   - component: {fileID: 249047005}
   - component: {fileID: 249047004}
-  - component: {fileID: 249047008}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -551,27 +550,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249047002}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!65 &249047008
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249047002}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
-  m_Center: {x: 0.0000000018626451, y: -0.00000016391277, z: 0}
 --- !u!1 &311622227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2873,7 +2851,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sentences:
   - sentenceTemplate: In ancient Rome, gladiators would often fight in the ___.
-    missingWord: Colosseum
+    missingWord: coliseum
   - sentenceTemplate: The scientist carefully observed the tiny organisms under the
       ___.
     missingWord: Microscope
@@ -2884,6 +2862,7 @@ MonoBehaviour:
   sentenceDisplay: {fileID: 932487256}
   revealDisplay: {fileID: 1060900090}
   GuessDisplay: {fileID: 1041542465}
+  answerDisplay: {fileID: 1230286282}
   actionAsset: {fileID: -944628639613478452, guid: 4e6c388809b0ed943aa135bd00ad3bd5, type: 3}
   unityConnection: {fileID: 1680179260}
   enemyController: {fileID: 1523878683}
@@ -4340,7 +4319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_System: {fileID: 1569595241}
-  m_MoveSpeed: 2
+  m_MoveSpeed: 30
   m_EnableStrafe: 1
   m_EnableFly: 0
   m_UseGravity: 1

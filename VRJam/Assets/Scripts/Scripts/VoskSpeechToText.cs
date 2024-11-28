@@ -85,11 +85,11 @@ public class VoskSpeechToText : MonoBehaviour
 	//If Auto start is enabled, starts vosk speech to text.
 	void Start()
 	{
-		VoiceProcessor.StopRecording();
 		if (AutoStart)
 		{
 			StartVoskStt();
 		}
+		VoiceProcessor.StopRecording();
 	}
 
 	/// <summary>

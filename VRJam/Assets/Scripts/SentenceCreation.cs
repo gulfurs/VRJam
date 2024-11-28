@@ -19,6 +19,7 @@ public class SentenceCreation : MonoBehaviour
     public TextMeshPro sentenceDisplay;
     public TextMeshPro revealDisplay;
     public TextMeshPro GuessDisplay;
+    public TextMeshPro answerDisplay;
 
     private int currentSentenceIndex = 0;
     //private int lettersRevealed = 0;
@@ -49,7 +50,7 @@ public class SentenceCreation : MonoBehaviour
         // Subscribe to the actions
         revealAction.performed += RevealNextLetter;
         confirmAction.performed += ConfirmGuess;
-        startRec.performed += StartRecording;
+        //startRec.performed += StartRecording;
 
         // Enable the actions
         revealAction.Enable();
@@ -61,7 +62,7 @@ public class SentenceCreation : MonoBehaviour
     {
         revealAction.performed -= RevealNextLetter;
         confirmAction.performed -= ConfirmGuess;
-        startRec.performed -= StartRecording;
+        //startRec.performed -= StartRecording;
 
         // Disable the actions
         revealAction.Disable();
@@ -179,7 +180,7 @@ public class SentenceCreation : MonoBehaviour
             return;
         }
 
-        string transcription = unityConnection.transcription;
+        string transcription = answerDisplay.text;
         if (string.IsNullOrEmpty(transcription))
         {
             Debug.Log("Please speak your guess first.");
@@ -224,10 +225,10 @@ public class SentenceCreation : MonoBehaviour
             GuessDisplay.text = "You've completed all sentences!";
         }
     }
-
+/*
     private void StartRecording(InputAction.CallbackContext context)
     {
         unityConnection.StartTranscriptionProcess();
-    }
+    } */
     
 }

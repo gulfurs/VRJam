@@ -14,7 +14,7 @@ public class VoskResultText : MonoBehaviour
 
     private void OnTranscriptionResult(string obj)
     {
-        Debug.Log(obj);
+        //Debug.Log(obj);
         var result = new RecognitionResult(obj);
         ResultText.text = "";
         for (int i = 0; i < result.Phrases.Length; i++)

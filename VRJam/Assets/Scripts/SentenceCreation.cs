@@ -78,7 +78,7 @@ public class SentenceCreation : MonoBehaviour
         enemyController = FindObjectOfType<Enemy>();
 
         if (audioManager == null){Debug.LogError("AudioManager instance not found.");}
-        if (enemyController == null){Debug.LogError("Enemy controller not found.");}
+        //if (enemyController == null){Debug.LogError("Enemy controller not found.");}
     }
 
     void Update()

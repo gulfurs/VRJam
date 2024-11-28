@@ -213,6 +213,7 @@ public class VoiceProcessor : MonoBehaviour
     }
 
     public void StartRecord(){
+        Debug.Log("Its starting man!");
         StartRecording();
     }
 

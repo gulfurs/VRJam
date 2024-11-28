@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.InputSystem;
+using System;
 
 public class SentenceCreation : MonoBehaviour
 {
@@ -37,6 +38,9 @@ public class SentenceCreation : MonoBehaviour
     public Enemy enemyController;
     public GameObject Sword;
     //public Transform SwordSpawnPos;
+
+    public event Action winEvent;
+    public event Action loseEvent;
 
     private bool enemySummoned = false;
 
@@ -72,11 +76,10 @@ public class SentenceCreation : MonoBehaviour
 
     void Start()
     {
-        LoadCurrentSentence();
-
         audioManager = AudioManager.instance;
         enemyController = FindObjectOfType<Enemy>();
-
+        ShuffleList();
+        LoadCurrentSentence();
         if (audioManager == null){Debug.LogError("AudioManager instance not found.");}
         if (enemyController == null){Debug.LogError("Enemy controller not found.");}
     }
@@ -139,7 +142,7 @@ public class SentenceCreation : MonoBehaviour
             // Pick a random index that hasn't been revealed yet
             do
             {
-                randomIndex = Random.Range(0, currentSentence.missingWord.Length);
+                randomIndex = UnityEngine.Random.Range(0, currentSentence.missingWord.Length);
             }
             while (revealedIndices.Contains(randomIndex));
 
@@ -192,23 +195,11 @@ public class SentenceCreation : MonoBehaviour
 
         if (isCorrect)
         {
-            Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
-            GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
-            audioManager.PlayRight();
-            NextSentence();
+            CorrectAnswer();
         }
         else
         {
-            Debug.Log("Incorrect. Try again.");
-            GuessDisplay.text = "Incorrect. Try again.";
-            audioManager.PlayWrong();
-            //Enemy enemyController = FindObjectOfType<Enemy>();
-           /* if (enemyController != null){
-                    enemySummoned = true;
-                    GuessDisplay.text = "Enemy Summoned! Defeat them in combat!";
-                    enemyController.ReleaseEnemy();
-                }*/
-            SummonEnemy();
+            WrongAnswer();
         }
     }
 
@@ -225,10 +216,30 @@ public class SentenceCreation : MonoBehaviour
             GuessDisplay.text = "You've completed all sentences!";
         }
     }
-/*
-    private void StartRecording(InputAction.CallbackContext context)
+
+    void CorrectAnswer(){
+        winEvent?.Invoke();
+        Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
+        GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
+        audioManager.PlayRight();
+        NextSentence();
+    }
+
+    void WrongAnswer() {
+        loseEvent?.Invoke();
+        Debug.Log("Incorrect. Try again.");
+        GuessDisplay.text = "Incorrect. Try again.";
+        audioManager.PlayWrong();
+    }
+
+    public void ShuffleList()
     {
-        unityConnection.StartTranscriptionProcess();
-    } */
-    
+        for (int i = 0; i < sentences.Count; i++)
+        {
+            SentenceData temp = sentences[i];
+            int randomIndex = UnityEngine.Random.Range(i, sentences.Count);
+            sentences[i] = sentences[randomIndex];
+            sentences[randomIndex] = temp;
+        }
+    }
 }

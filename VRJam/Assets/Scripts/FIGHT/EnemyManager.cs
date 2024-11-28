@@ -20,7 +20,7 @@ public class EnemyManager : MonoBehaviour
     {
         savedEnemy = transform.GetChild(0).gameObject;
 
-        Destroy(savedEnemy);
+        //Destroy(savedEnemy);
 
         var getSentenceCreation = FindFirstObjectByType<SentenceCreation>();
         getSentenceCreation.loseEvent += losingEvent;

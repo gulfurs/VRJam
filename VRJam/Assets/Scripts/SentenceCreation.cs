@@ -8,6 +8,8 @@ using System;
 
 public class SentenceCreation : MonoBehaviour
 {
+
+    // The SentenceData
     [System.Serializable]
     public class SentenceData
     {
@@ -19,32 +21,44 @@ public class SentenceCreation : MonoBehaviour
         public string definition;
     }
 
+    //The TV Screen Text
     public List<SentenceData> sentences = new List<SentenceData>();
-    public TextMeshPro sentenceDisplay;
+
     public TextMeshPro revealDisplay;
     public TextMeshPro GuessDisplay;
     public TextMeshPro answerDisplay;
 
+    public TextMeshPro categoryDisplay;
+    public TextMeshPro definitionDisplay;
+    public TextMeshPro sentenceDisplay;
+    //public TextMeshPro useInSentence;
+
+    //Bool checker for TV
+    private bool isDefinition = false;
+    private bool isUseInSentece = false;
+
+
+    //SentenceLogic
     private int currentSentenceIndex = 0;
-    //private int lettersRevealed = 0;
     private List<int> revealedIndices = new List<int>();
     private SentenceData currentSentence;
 
+    //InputActions
     public InputActionAsset actionAsset;
-
     private InputAction revealAction;
     private InputAction confirmAction;
     private InputAction startRec;
     
+    // Reference to other scripts
     public UnityConnection unityConnection;
     private AudioManager audioManager;
     public Enemy enemyController;
     public GameObject Sword;
-    //public Transform SwordSpawnPos;
 
+
+    //Fighting
     public event Action winEvent;
     public event Action loseEvent;
-
     private bool enemySummoned = false;
 
     void OnEnable()
@@ -100,6 +114,16 @@ public class SentenceCreation : MonoBehaviour
         {
             ConfirmGuessDirect();
         }
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            ToggleDefinitionHint();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            ToggleSentenceHint();
+        }
+
     }
 
     void LoadCurrentSentence()
@@ -107,8 +131,14 @@ public class SentenceCreation : MonoBehaviour
         currentSentence = sentences[currentSentenceIndex];
         //lettersRevealed = 0;
         revealedIndices.Clear();
+        revealedIndices.Add(0);
         UpdateRevealDisplay();
         UpdateSentenceDisplay();
+
+        //The hints
+        categoryDisplay.text = "Category: " + currentSentence.category;
+        definitionDisplay.text ="";
+        sentenceDisplay.text ="";
     }
 
     void UpdateSentenceDisplay()
@@ -159,6 +189,22 @@ public class SentenceCreation : MonoBehaviour
             SummonEnemy();
         }
     }
+
+    void ToggleDefinitionHint(){
+        if (!isDefinition)
+    {
+        definitionDisplay.text = "Definition: " + currentSentence.definition;
+        isDefinition = true;
+    }
+    }
+    void ToggleSentenceHint(){
+        if (!isUseInSentece)
+    {
+        sentenceDisplay.text = "Template: " + currentSentence.sentenceTemplate;
+        isUseInSentece = true;
+    }
+    }
+
     void SummonEnemy(){
         if (!enemySummoned && enemyController != null)
         {

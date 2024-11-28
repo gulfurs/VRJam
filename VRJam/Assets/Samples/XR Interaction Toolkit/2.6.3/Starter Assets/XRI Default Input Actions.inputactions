@@ -2730,6 +2730,34 @@
                     "isPartOfComposite": true
                 }
             ]
+        },
+        {
+            "name": "PC Controls",
+            "id": "5c9221c4-218b-4ef9-9690-dbc33856dac1",
+            "actions": [
+                {
+                    "name": "PCBUTTON",
+                    "type": "Button",
+                    "id": "5dbe1530-a085-4301-ab4b-ff8abca93ce9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "ffb277c7-fc58-4ab8-926b-bd371926c2f1",
+                    "path": "<Keyboard>/period",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PCBUTTON",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

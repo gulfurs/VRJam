@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class XRButtonHandler : MonoBehaviour
 {
-    public InputActionReference buttonAction; // Assign your action in the Inspector
+    public InputActionReference buttonAction; 
     public VoiceProcessor getVoiceProcessor;
 
     void Start() {

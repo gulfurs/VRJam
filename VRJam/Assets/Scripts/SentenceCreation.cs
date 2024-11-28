@@ -14,6 +14,9 @@ public class SentenceCreation : MonoBehaviour
         [TextArea(2, 5)]
         public string sentenceTemplate;
         public string missingWord;
+        public string category;
+        [TextArea(2, 5)]
+        public string definition;
     }
 
     public List<SentenceData> sentences = new List<SentenceData>();

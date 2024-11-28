@@ -579,6 +579,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6fed8db287e5d3468535d16452a0835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  savedEnemy: {fileID: 0}
+  spawnRadius: 59
+  arcAngle: 180
+  spawnCenter: {fileID: 280824883}
+  index: 1
+  playerWeapon: {fileID: 296385155}
 --- !u!4 &280824883
 Transform:
   m_ObjectHideFlags: 0
@@ -588,13 +594,18 @@ Transform:
   m_GameObject: {fileID: 280824881}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1176111004}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &296385155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 28721f6ed274d7e48b83ab432ea0c29f, type: 3}
+  m_PrefabInstance: {fileID: 1865697322}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &311622227
 GameObject:
   m_ObjectHideFlags: 0
@@ -2560,7 +2571,7 @@ Transform:
   m_GameObject: {fileID: 1176111001}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 51.118942, y: -58.575073, z: 66.84118}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4484,6 +4495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHP: 100
   healthTextMesh: {fileID: 1909064364}
+  swordDamage: 20
 --- !u!1001 &1574753875
 PrefabInstance:
   m_ObjectHideFlags: 0

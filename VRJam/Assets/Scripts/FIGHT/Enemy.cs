@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
 
         currentHP = maxHP;
         startPosition = transform.position;   // Store starting position
-        gameObject.SetActive(false);
+        //gameObject.SetActive(false);
     }
 
     // Called externally to release a new enemy
@@ -107,7 +107,7 @@ public class Enemy : MonoBehaviour
         currentState = EnemyState.Idle;
 
         Invoke("ResetEnemy", 2f);  // Wait for death animation before resetting
-        sentenceCreation.Sword.SetActive(false);
+        //sentenceCreation.Sword.SetActive(false);
     }
 
     void ResetEnemy()

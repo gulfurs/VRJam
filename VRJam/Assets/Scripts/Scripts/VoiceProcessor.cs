@@ -209,9 +209,17 @@ public class VoiceProcessor : MonoBehaviour
 
         _audioClip = Microphone.Start(CurrentDeviceName, true, 1, sampleRate);
 
-        StartCoroutine(RecordData());
+        StartCoroutine(StartMicrophoneAsync());
     }
 
+    private IEnumerator StartMicrophoneAsync()
+    {
+        yield return null; // Allow a frame to pass if necessary
+        _audioClip = Microphone.Start(CurrentDeviceName, true, 1, SampleRate);
+        yield return new WaitForSeconds(0.1f); // Optional: wait for buffer to initialize
+        StartCoroutine(RecordData());
+    }
+    
     public void StartRecord(){
         Debug.Log("Its starting man!");
         StartRecording();

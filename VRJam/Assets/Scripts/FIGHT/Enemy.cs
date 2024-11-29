@@ -24,12 +24,16 @@ public class Enemy : MonoBehaviour
     private Vector3 startPosition;  
     public float distanceToPlayer;   
 
+    public bool isDead = false;
+
+    EnemyManager enemyMan;
+
     void Start()
     {
         animator = GetComponent<Animator>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
         sentenceCreation = FindObjectOfType<SentenceCreation>();
-
+        enemyMan = FindFirstObjectByType<EnemyManager>();
         currentHP = maxHP;
         startPosition = transform.position;   // Store starting position
         //gameObject.SetActive(false);
@@ -49,9 +53,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
+        if (!isDead) {
         ChasePlayer(distanceToPlayer);
         AttackPlayer(distanceToPlayer);
+        }
         //animator.SetFloat(StateParam, 0);
 
     }
@@ -84,12 +89,12 @@ public class Enemy : MonoBehaviour
     void ChasePlayer(float distance)
     {   
         if (distance > attackRange)
-        {
+            {
             currentState = EnemyState.Chasing;  // Return to chasing if the player moves away
             animator.SetFloat(StateParam, 1);
             Debug.Log("CHASE YOU!!");
             return;
-        }
+            }
     }
 
     public void TakeDamage(float damageAmount)
@@ -103,16 +108,18 @@ public class Enemy : MonoBehaviour
 
     void Die()
     {
-        animator.SetTrigger("Die");
-        currentState = EnemyState.Idle;
+        isDead = true;
+        animator.SetFloat(StateParam, -1);
+        //currentState = EnemyState.Idle;
 
-        Invoke("ResetEnemy", 2f);  // Wait for death animation before resetting
+        //Invoke("ResetEnemy", 2f);  // Wait for death animation before resetting
         //sentenceCreation.Sword.SetActive(false);
     }
 
-    void ResetEnemy()
+    public void DestroyEnemy()
     {
-        gameObject.SetActive(false);  // Hide enemy until respawned externally
+        enemyMan.HandleEnemyDestroyed(gameObject);
+        Destroy(gameObject);  // Hide enemy until respawned externally
     }
 
     public bool IsDead()

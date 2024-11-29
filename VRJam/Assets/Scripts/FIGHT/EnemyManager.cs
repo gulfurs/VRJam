@@ -15,6 +15,9 @@ public class EnemyManager : MonoBehaviour
     public event Action noEnemyEvent;
     public GameObject playerWeapon;
     private List<GameObject> activeEnemies = new List<GameObject>();
+    
+    public GameObject MainScreen;
+    public GameObject CamScreen;
 
     void Start()
     {
@@ -29,6 +32,8 @@ public class EnemyManager : MonoBehaviour
     void losingEvent()
     {
         playerWeapon.SetActive(true);
+        MainScreen.SetActive(false);
+        CamScreen.SetActive(true);
         // SPAWN MULTIPLE ENEMIES RANDOMLY BASED ON INDEX
         for (int i = 0; i < index; i++)
         {
@@ -59,7 +64,7 @@ public class EnemyManager : MonoBehaviour
         activeEnemies.Add(newEnemy);
     }
 
-    void HandleEnemyDestroyed(GameObject enemy)
+    public void HandleEnemyDestroyed(GameObject enemy)
     {
         // REMOVE ENEMY FROM LIST
         activeEnemies.Remove(enemy);
@@ -69,6 +74,8 @@ public class EnemyManager : MonoBehaviour
         {
             noEnemyEvent?.Invoke();
             playerWeapon.SetActive(false);
+            MainScreen.SetActive(true);
+            CamScreen.SetActive(false);
         }
     }
 }

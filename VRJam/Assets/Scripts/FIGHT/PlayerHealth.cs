@@ -52,6 +52,7 @@ public class PlayerHealth : MonoBehaviour
     void Die()
     {
         Debug.Log("YOU DEAD SON");
-        // Add any death logic here (e.g., respawn or game over)
+        var getGameManager = FindObjectOfType<GameManager>();
+        getGameManager.EndGame();
     }
 }

@@ -55,10 +55,13 @@ public class SentenceCreation : MonoBehaviour
     public Enemy enemyController;
     public GameObject Sword;
 
-
+    private ScoreManager getScoreManager;
     //Fighting
     public event Action winEvent;
     public event Action loseEvent;
+
+    private int maxScore = 100;
+    private int score = 100;
     private bool enemySummoned = false;
 
     void OnEnable()
@@ -92,7 +95,8 @@ public class SentenceCreation : MonoBehaviour
     }
 
     void Start()
-    {
+    {   
+        getScoreManager = FindObjectOfType<ScoreManager>();
         audioManager = AudioManager.instance;
         enemyController = FindObjectOfType<Enemy>();
         ShuffleList();
@@ -107,7 +111,7 @@ public class SentenceCreation : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             RevealNextLetterDirect();
-            SummonEnemy();
+            //loseEvent?.Invoke();
         }
 
         if (Input.GetKeyDown(KeyCode.C))
@@ -121,7 +125,8 @@ public class SentenceCreation : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
-            ToggleSentenceHint();
+            //ToggleSentenceHint();
+            CorrectAnswer();
         }
 
     }
@@ -129,7 +134,7 @@ public class SentenceCreation : MonoBehaviour
     void LoadCurrentSentence()
     {
         currentSentence = sentences[currentSentenceIndex];
-        //lettersRevealed = 0;
+        score = maxScore;
         revealedIndices.Clear();
         revealedIndices.Add(0);
         UpdateRevealDisplay();
@@ -180,13 +185,15 @@ public class SentenceCreation : MonoBehaviour
             while (revealedIndices.Contains(randomIndex));
 
             revealedIndices.Add(randomIndex);
-
+            score = Mathf.CeilToInt(maxScore * (1 - (float)revealedIndices.Count / currentSentence.missingWord.Length));
+            score = Mathf.Max(score, 0);
+            //Debug.Log(revealedIndices.Count);
             UpdateRevealDisplay();
             UpdateSentenceDisplay();
         }
         if (revealedIndices.Count == currentSentence.missingWord.Length)
         {
-            SummonEnemy();
+            loseEvent?.Invoke();
         }
     }
 
@@ -263,6 +270,8 @@ public class SentenceCreation : MonoBehaviour
         {
             Debug.Log("You've completed all sentences!");
             GuessDisplay.text = "You've completed all sentences!";
+            var getGameManager = FindObjectOfType<GameManager>();
+            getGameManager.EndGame();
         }
     }
 
@@ -271,6 +280,7 @@ public class SentenceCreation : MonoBehaviour
         Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
         GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
         audioManager.PlayRight();
+        getScoreManager.AddScore(score);
         NextSentence();
     }
 

@@ -221,17 +221,19 @@ public class SentenceCreation : MonoBehaviour
 
     public void ToggleDefinitionHint(){
         if (!isDefinition)
-    {
+        {
         definitionDisplay.text = "Definition: " + currentSentence.definition;
+        getScoreManager.HintTax();
         isDefinition = true;
-    }
+        }
     }
     public void ToggleSentenceHint(){
         if (!isUseInSentece)
-    {
+        {
         sentenceDisplay.text = "Sentence: " + currentSentence.sentenceTemplate;
+        getScoreManager.HintTax();
         isUseInSentece = true;
-    }
+        }
     }
     
     private void DefinitionHint(InputAction.CallbackContext context)

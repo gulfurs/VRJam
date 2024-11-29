@@ -6,7 +6,7 @@ public class PlayerHealth : MonoBehaviour
 {
     [Header("Health Settings")]
     public float maxHP = 200f;              // Maximum health points
-    private float currentHP;                // Current health points
+    public float currentHP;                // Current health points
 
     [Header("3D Health Bar")]
     public TextMeshPro healthTextMesh;         // Reference to a TextMesh in the scene

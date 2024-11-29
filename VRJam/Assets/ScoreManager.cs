@@ -19,7 +19,7 @@ public class ScoreManager : MonoBehaviour
         lastScoreText.text = "Score: " +  currentScore;
         lifeBonusText.text = "Life Bonus: " + playerHP.currentHP;
         hintTaxText.text = "Hint Tax: " + hintTax;
-        float finalScore = Mathf.Round((currentScore * playerHP.currentHP) / hintTax);
+        float finalScore = Mathf.Round((currentScore * (playerHP.currentHP+1)) / hintTax);
         finalScoreText.text = "Final Score: " + finalScore; 
     }
 

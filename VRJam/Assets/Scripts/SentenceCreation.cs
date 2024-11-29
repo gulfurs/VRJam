@@ -142,8 +142,8 @@ public class SentenceCreation : MonoBehaviour
 
         //The hints
         categoryDisplay.text = "Category: " + currentSentence.category;
-        definitionDisplay.text ="";
-        sentenceDisplay.text ="";
+        definitionDisplay.text ="Get Hint";
+        sentenceDisplay.text ="Get Hint";
     }
 
     void UpdateSentenceDisplay()

@@ -82,9 +82,9 @@ public class SentenceCreation : MonoBehaviour
         revealAction.performed += RevealNextLetter;
         confirmAction.performed += ConfirmGuess;
         //startRec.performed += StartRecording;
-        /*
+        
         HintDef.performed += DefinitionHint;
-        HintSen.performed += SentenceHint; */
+        HintSen.performed += SentenceHint;
 
         // Enable the actions
         revealAction.Enable();
@@ -100,9 +100,9 @@ public class SentenceCreation : MonoBehaviour
         revealAction.performed -= RevealNextLetter;
         confirmAction.performed -= ConfirmGuess;
         //startRec.performed -= StartRecording;
-        /*
+    
         HintDef.performed -= DefinitionHint;
-        HintSen.performed -= SentenceHint; */
+        HintSen.performed -= SentenceHint;
 
         // Disable the actions
         revealAction.Disable();
@@ -150,10 +150,13 @@ public class SentenceCreation : MonoBehaviour
 
     }
 
+
     void LoadCurrentSentence()
     {
         currentSentence = sentences[currentSentenceIndex];
         score = maxScore;
+        isDefinition = false;
+        isUseInSentece = false;
         revealedIndices.Clear();
         revealedIndices.Add(0);
         UpdateRevealDisplay();
@@ -208,7 +211,7 @@ public class SentenceCreation : MonoBehaviour
             score = Mathf.Max(score, 0);
             //Debug.Log(revealedIndices.Count);
             UpdateRevealDisplay();
-            UpdateSentenceDisplay();
+            //UpdateSentenceDisplay();
         }
         if (revealedIndices.Count == currentSentence.missingWord.Length)
         {
@@ -230,7 +233,7 @@ public class SentenceCreation : MonoBehaviour
         isUseInSentece = true;
     }
     }
-    /*
+    
     private void DefinitionHint(InputAction.CallbackContext context)
     {
         ToggleDefinitionHint();
@@ -238,7 +241,7 @@ public class SentenceCreation : MonoBehaviour
     private void SentenceHint(InputAction.CallbackContext context)
     {
         ToggleSentenceHint();
-    } */
+    } 
 
     // Method for Input System callbacks
     private void ConfirmGuess(InputAction.CallbackContext context)

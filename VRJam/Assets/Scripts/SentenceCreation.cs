@@ -47,6 +47,9 @@ public class SentenceCreation : MonoBehaviour
     public InputActionAsset actionAsset;
     private InputAction revealAction;
     private InputAction confirmAction;
+
+    private InputAction HintDef;
+    private InputAction HintSen;
     private InputAction startRec;
     
     // Reference to other scripts
@@ -69,6 +72,10 @@ public class SentenceCreation : MonoBehaviour
         var actionMap = actionAsset.FindActionMap("XRActionMap"); 
         revealAction = actionMap.FindAction("RevealLetter_XR");  
         confirmAction = actionMap.FindAction("ConfirmAction_XR"); 
+
+        HintDef = actionMap.FindAction("HintDef"); 
+        HintSen = actionMap.FindAction("HintSen"); 
+
         startRec = actionMap.FindAction("StartRec_XR");
 
         // Subscribe to the actions
@@ -76,9 +83,15 @@ public class SentenceCreation : MonoBehaviour
         confirmAction.performed += ConfirmGuess;
         //startRec.performed += StartRecording;
 
+        HintDef.performed += DefinitionHint;
+        HintSen.performed += SentenceHint;
+
         // Enable the actions
         revealAction.Enable();
         confirmAction.Enable();
+
+        HintDef.Enable();
+        HintSen.Enable();
         startRec.Enable();
     }
 
@@ -88,9 +101,15 @@ public class SentenceCreation : MonoBehaviour
         confirmAction.performed -= ConfirmGuess;
         //startRec.performed -= StartRecording;
 
+        HintDef.performed -= DefinitionHint;
+        HintSen.performed -= SentenceHint;
+
         // Disable the actions
         revealAction.Disable();
         confirmAction.Disable();
+
+        HintDef.Disable();
+        HintSen.Disable();
         startRec.Disable();
     }
 
@@ -207,9 +226,18 @@ public class SentenceCreation : MonoBehaviour
     public void ToggleSentenceHint(){
         if (!isUseInSentece)
     {
-        sentenceDisplay.text = "Template: " + currentSentence.sentenceTemplate;
+        sentenceDisplay.text = "Sentence: " + currentSentence.sentenceTemplate;
         isUseInSentece = true;
     }
+    }
+
+    private void DefinitionHint(InputAction.CallbackContext context)
+    {
+        ToggleDefinitionHint();
+    }
+    private void SentenceHint(InputAction.CallbackContext context)
+    {
+        ToggleSentenceHint();
     }
 
     void SummonEnemy(){

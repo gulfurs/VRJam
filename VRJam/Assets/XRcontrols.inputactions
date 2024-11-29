@@ -31,13 +31,31 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "HintDef",
+                    "type": "Button",
+                    "id": "1eb9dcd5-b540-4cb4-9b01-7c90f0800a4d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "HintSen",
+                    "type": "Button",
+                    "id": "a043f6cd-8a76-48ad-b719-061ce58f410b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "a7b4a9f7-670e-4efd-a007-64629eccba72",
-                    "path": "<XRController>{LeftHand}/{TriggerButton}",
+                    "path": "<XRController>{RightHand}/{TriggerButton}",
                     "interactions": "",
                     "processors": "",
                     "groups": "XRControls",
@@ -75,6 +93,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "StartRec_XR",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad6d1b49-e1e6-4433-8c10-59753b319401",
+                    "path": "<XRController>{RightHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HintDef",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5dd59b06-fb9d-4075-8c3e-ac4287f34580",
+                    "path": "<XRController>{LeftHand}/{GripButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HintSen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

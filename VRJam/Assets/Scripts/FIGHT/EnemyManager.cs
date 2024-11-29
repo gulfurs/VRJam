@@ -72,6 +72,8 @@ public class EnemyManager : MonoBehaviour
         // IF ENEMIES EQUAL 0?
         if (activeEnemies.Count == 0)
         {
+            var getSentenceCreation = FindObjectOfType<SentenceCreation>();
+            getSentenceCreation.NextSentence();
             noEnemyEvent?.Invoke();
             playerWeapon.SetActive(false);
             MainScreen.SetActive(true);

@@ -82,9 +82,9 @@ public class SentenceCreation : MonoBehaviour
         revealAction.performed += RevealNextLetter;
         confirmAction.performed += ConfirmGuess;
         //startRec.performed += StartRecording;
-
+        /*
         HintDef.performed += DefinitionHint;
-        HintSen.performed += SentenceHint;
+        HintSen.performed += SentenceHint; */
 
         // Enable the actions
         revealAction.Enable();
@@ -100,9 +100,9 @@ public class SentenceCreation : MonoBehaviour
         revealAction.performed -= RevealNextLetter;
         confirmAction.performed -= ConfirmGuess;
         //startRec.performed -= StartRecording;
-
+        /*
         HintDef.performed -= DefinitionHint;
-        HintSen.performed -= SentenceHint;
+        HintSen.performed -= SentenceHint; */
 
         // Disable the actions
         revealAction.Disable();
@@ -230,7 +230,7 @@ public class SentenceCreation : MonoBehaviour
         isUseInSentece = true;
     }
     }
-
+    /*
     private void DefinitionHint(InputAction.CallbackContext context)
     {
         ToggleDefinitionHint();
@@ -238,19 +238,7 @@ public class SentenceCreation : MonoBehaviour
     private void SentenceHint(InputAction.CallbackContext context)
     {
         ToggleSentenceHint();
-    }
-
-    void SummonEnemy(){
-        if (!enemySummoned && enemyController != null)
-        {
-            enemySummoned = true;
-            GuessDisplay.text = "Enemy Summoned! Defeat them in combat!";
-            enemyController.ReleaseEnemy();
-
-            Sword.SetActive(true);
-            
-        }
-    }
+    } */
 
     // Method for Input System callbacks
     private void ConfirmGuess(InputAction.CallbackContext context)
@@ -287,7 +275,7 @@ public class SentenceCreation : MonoBehaviour
         }
     }
 
-    void NextSentence()
+    public void NextSentence()
     {
         currentSentenceIndex++;
         if (currentSentenceIndex < sentences.Count)

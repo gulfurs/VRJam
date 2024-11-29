@@ -174,6 +174,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   VoskSpeechToText: {fileID: 27775397}
   ResultText: {fileID: 1230286282}
+  CheckInput: 0
 --- !u!114 &27775399
 MonoBehaviour:
   m_ObjectHideFlags: 0

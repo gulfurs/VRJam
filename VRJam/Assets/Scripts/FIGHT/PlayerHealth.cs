@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // Assuming the enemy has the Enemy component
+            Debug.Log("CRASH");
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {

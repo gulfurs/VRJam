@@ -4,10 +4,10 @@ using UnityEngine.InputSystem;
 public class XRButtonHandler : MonoBehaviour
 {
     public InputActionReference buttonAction; 
-    public VoiceProcessor getVoiceProcessor;
+    public VoskResultText getVoiceProcessor;
 
     void Start() {
-        getVoiceProcessor = FindFirstObjectByType<VoiceProcessor>();
+        getVoiceProcessor = FindFirstObjectByType<VoskResultText>();
     }
 
     private void OnEnable()
@@ -26,12 +26,12 @@ public class XRButtonHandler : MonoBehaviour
 
     private void OnButtonHeld(InputAction.CallbackContext context)
     {
-        getVoiceProcessor.StartRecord();
+        getVoiceProcessor.CheckInput = true;
     }
 
     private void OnButtonReleased(InputAction.CallbackContext context)
     {
         Debug.Log("Button released");
-        getVoiceProcessor.StopRecording();
+        getVoiceProcessor.CheckInput = false;
     }
 }

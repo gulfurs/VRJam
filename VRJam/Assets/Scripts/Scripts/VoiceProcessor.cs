@@ -181,14 +181,14 @@ public class VoiceProcessor : MonoBehaviour
     /// <param name="sampleRate">Sample rate to record at</param>
     /// <param name="frameSize">Size of audio frames to be delivered</param>
     /// <param name="autoDetect">Should the audio continuously record based on the volume</param>
-    public void StartRecording(int sampleRate = 8000, int frameSize = 256, bool ?autoDetect = null)
+    public void StartRecording(int sampleRate = 16000, int frameSize = 512, bool ?autoDetect = null)
     {
         if (autoDetect != null)
         {
             _autoDetect = (bool) autoDetect;
         }
 
-        /*if (IsRecording)
+        if (IsRecording)
         {
             // if sample rate or frame size have changed, restart recording
             if (sampleRate != SampleRate || frameSize != FrameLength)
@@ -202,24 +202,16 @@ public class VoiceProcessor : MonoBehaviour
             }
 
             return;
-        }*/
+        }
 
         SampleRate = sampleRate;
         FrameLength = frameSize;
 
         _audioClip = Microphone.Start(CurrentDeviceName, true, 1, sampleRate);
 
-        StartCoroutine(StartMicrophoneAsync());
-    }
-
-    private IEnumerator StartMicrophoneAsync()
-    {
-        yield return null; // Allow a frame to pass if necessary
-        _audioClip = Microphone.Start(CurrentDeviceName, true, 1, SampleRate);
-        yield return new WaitForSeconds(0.1f); // Optional: wait for buffer to initialize
         StartCoroutine(RecordData());
     }
-    
+
     public void StartRecord(){
         Debug.Log("Its starting man!");
         StartRecording();

@@ -197,14 +197,14 @@ public class SentenceCreation : MonoBehaviour
         }
     }
 
-    void ToggleDefinitionHint(){
+    public void ToggleDefinitionHint(){
         if (!isDefinition)
     {
         definitionDisplay.text = "Definition: " + currentSentence.definition;
         isDefinition = true;
     }
     }
-    void ToggleSentenceHint(){
+    public void ToggleSentenceHint(){
         if (!isUseInSentece)
     {
         sentenceDisplay.text = "Template: " + currentSentence.sentenceTemplate;

@@ -9,10 +9,10 @@ public class ScoreManager : MonoBehaviour
     public TextMeshPro scoreText;
     public TextMeshProUGUI lastScoreText, lifeBonusText, hintTaxText, finalScoreText;
     public int hintTax;
-    private PlayerHealth playerHP;
+    public PlayerHealth playerHP;
 
     void Start() {
-        playerHP = GetComponent<PlayerHealth>();
+        //playerHP = GetComponent<PlayerHealth>();
     }
 
     public void EndingScore() {

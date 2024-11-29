@@ -6,12 +6,12 @@ using UnityEngine.Playables;
 public class GameManager : MonoBehaviour
 {
     private PlayableDirector playDirect;
-    private ScoreManager scoreManager;
+    public ScoreManager scoreManager;
 
     void Start()
     {
         playDirect = GetComponent<PlayableDirector>();
-        scoreManager = GetComponent<ScoreManager>();
+        //scoreManager = GetComponent<ScoreManager>();
     }
 
     public void EndGame()
@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         if (playDirect != null)
         {
             playDirect.Play();
-            scoreManager.EndingScore();
         }
+        scoreManager.EndingScore();
     }
 }

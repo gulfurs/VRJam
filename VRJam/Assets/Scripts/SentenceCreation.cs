@@ -57,6 +57,7 @@ public class SentenceCreation : MonoBehaviour
     private AudioManager audioManager;
     public Enemy enemyController;
     public GameObject Sword;
+    public hapticfeed hapticFeed;
 
     private ScoreManager getScoreManager;
     //Fighting
@@ -300,6 +301,7 @@ public class SentenceCreation : MonoBehaviour
         winEvent?.Invoke();
         Debug.Log("Correct! The missing word is: " + currentSentence.missingWord);
         GuessDisplay.text = "Correct! The missing word is: " + currentSentence.missingWord;
+        hapticFeed.OnCorrectAnswer();
         audioManager.PlayRight();
         getScoreManager.AddScore(score);
         NextSentence();

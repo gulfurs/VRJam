@@ -11,6 +11,9 @@ public class PlayerHealth : MonoBehaviour
     [Header("3D Health Bar")]
     public TextMeshPro healthTextMesh;         // Reference to a TextMesh in the scene
 
+    public hapticfeed hapticFeed; 
+
+
     void Start()
     {
         currentHP = maxHP;
@@ -26,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         {
             Die();
         }
+        hapticFeed.OnEnemyHit();
     }
 
     void UpdateHealthText()

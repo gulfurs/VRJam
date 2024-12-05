@@ -10,7 +10,7 @@ public class SwordSwinger : MonoBehaviour
     {
         if (other.CompareTag("Enemy"))
         {
-            Debug.Log("CRASH");
+            //Debug.Log("CRASH");
             Enemy enemy = other.GetComponent<Enemy>();
         if (enemy != null)
             {

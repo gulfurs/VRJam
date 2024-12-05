@@ -22,7 +22,9 @@ public class Enemy : MonoBehaviour
     private float lastAttackTime;                
     private int currentHP;                       
     private Vector3 startPosition;  
-    public float distanceToPlayer;   
+    public float distanceToPlayer;  
+
+    public hapticfeed hapticFeed; 
 
     public bool isDead = false;
 
@@ -77,6 +79,7 @@ public class Enemy : MonoBehaviour
                 playerHealth.TakeDmg(damage);
                 lastAttackTime = Time.time;  // Reset cooldown timer
                 //animator.SetTrigger(ENEMY_ATTACK);
+                hapticFeed.OnPlayerHit();
                 animator.SetFloat(StateParam, 2);
             }
         }

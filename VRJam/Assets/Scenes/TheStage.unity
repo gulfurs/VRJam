@@ -4091,7 +4091,7 @@ MonoBehaviour:
   damage: 10
   maxHP: 40
   distanceToPlayer: 0
-  hapticFeed: {fileID: 0}
+  hapticFeed: {fileID: 251817107}
   isDead: 0
 --- !u!95 &1176111006
 Animator:
@@ -4786,7 +4786,7 @@ MonoBehaviour:
   unityConnection: {fileID: 0}
   enemyController: {fileID: 0}
   Sword: {fileID: 919132149155446097, guid: 28721f6ed274d7e48b83ab432ea0c29f, type: 3}
-  hapticFeed: {fileID: 0}
+  hapticFeed: {fileID: 251817107}
 --- !u!4 &1254777984
 Transform:
   m_ObjectHideFlags: 0
@@ -6897,7 +6897,7 @@ MonoBehaviour:
   maxHP: 100
   currentHP: 0
   healthTextMesh: {fileID: 1909064364}
-  hapticFeed: {fileID: 0}
+  hapticFeed: {fileID: 251817107}
 --- !u!95 &1569595245
 Animator:
   serializedVersion: 5

@@ -311,6 +311,7 @@ public class SentenceCreation : MonoBehaviour
         loseEvent?.Invoke();
         Debug.Log("Incorrect. Try again.");
         GuessDisplay.text = "Incorrect. Try again.";
+        hapticFeed.OnEnemyHit();
         audioManager.PlayWrong();
     }
 

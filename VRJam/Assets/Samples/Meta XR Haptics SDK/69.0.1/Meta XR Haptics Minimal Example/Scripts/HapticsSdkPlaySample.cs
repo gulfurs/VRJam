@@ -34,7 +34,7 @@ public class HapticsSdkPlaySample : MonoBehaviour
     }
 
     // This helper function allows us to identify the controller we are currently playing back on.
-    // We use this further down for logging purposes.
+    // We use this further down for logging purposes.   
     String GetControllerName(OVRInput.Controller controller)
     {
         if (controller == OVRInput.Controller.LTouch)

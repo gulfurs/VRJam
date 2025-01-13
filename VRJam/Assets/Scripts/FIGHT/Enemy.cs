@@ -37,19 +37,19 @@ public class Enemy : MonoBehaviour
         sentenceCreation = FindObjectOfType<SentenceCreation>();
         enemyMan = FindFirstObjectByType<EnemyManager>();
         currentHP = maxHP;
-        startPosition = transform.position;   // Store starting position
+        startPosition = transform.position;   //starting position
         //gameObject.SetActive(false);
     }
 
-    // Called externally to release a new enemy
+    //release a new enemy
     public void ReleaseEnemy()
     {
-        transform.position = startPosition;  // Reset position to the starting point
-        currentHP = maxHP;                   // Reset health
+        transform.position = startPosition;  //Reset position
+        currentHP = maxHP;                   //Reset health
         animator.SetFloat(StateParam, 0);
         //animator.SetBool(ENEMY_WALK, false); 
         gameObject.SetActive(true);          
-        currentState = EnemyState.Chasing;   // Start chasing immediately
+        currentState = EnemyState.Chasing;   //Start chasing
     }
 
     void Update()
@@ -68,20 +68,18 @@ public class Enemy : MonoBehaviour
         if (distance <= attackRange)
         {
             currentState = EnemyState.Attacking;
-            //animator.SetTrigger(ENEMY_ATTACK);
             animator.SetFloat(StateParam, 2);
-             Debug.Log("ATTACK ON RIVERDALE");
-             if (Time.time >= lastAttackTime + attackCooldown)
-        {
-            PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
-            if (playerHealth != null)
-            {
-                playerHealth.TakeDmg(damage);
-                lastAttackTime = Time.time;  // Reset cooldown timer
-                //animator.SetTrigger(ENEMY_ATTACK);
-                hapticFeed.OnPlayerHit();
-                animator.SetFloat(StateParam, 2);
-            }
+            Debug.Log("ATTACK ON RIVERDALE");
+
+            if (Time.time >= lastAttackTime + attackCooldown){
+                PlayerHealth playerHealth = player.GetComponent<PlayerHealth>();
+
+                if (playerHealth != null) {
+                    playerHealth.TakeDmg(damage);
+                    lastAttackTime = Time.time;  //cooldown timer
+                    hapticFeed.OnPlayerHit();
+                    animator.SetFloat(StateParam, 2);
+                }
         }
             return;
         }
@@ -91,9 +89,8 @@ public class Enemy : MonoBehaviour
 
     void ChasePlayer(float distance)
     {   
-        if (distance > attackRange)
-            {
-            currentState = EnemyState.Chasing;  // Return to chasing if the player moves away
+        if (distance > attackRange) {
+            currentState = EnemyState.Chasing; 
             animator.SetFloat(StateParam, 1);
             Debug.Log("CHASE YOU!!");
             return;

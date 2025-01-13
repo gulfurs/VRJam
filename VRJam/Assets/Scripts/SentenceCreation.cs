@@ -20,8 +20,6 @@ public class SentenceCreation : MonoBehaviour
         [TextArea(2, 5)]
         public string definition;
     }
-
-    //The TV Screen Text
     public List<SentenceData> sentences = new List<SentenceData>();
 
     public TextMeshPro revealDisplay;
